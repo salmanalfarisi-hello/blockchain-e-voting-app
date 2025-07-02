@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}Already Voted - Modern E-Voting{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center px-4 py-12 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div class="max-w-3xl w-full text-center">
+        <!-- Header -->
+        <div class="mb-12">
+            <div class="w-32 h-32 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-full flex items-center justify-center mx-auto mb-8 shadow-xl">
+                <i class="fas fa-check-circle text-white text-5xl"></i>
+            </div>
+            <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Vote Successfully Cast!</h1>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                You have already participated in this election. Thank you for exercising your democratic right!
+            </p>
+        </div>
+        
+        <!-- Information Card -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 mb-12 shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 dark:border-gray-700">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center justify-center">
+                <i class="fas fa-info-circle text-blue-600 mr-3"></i>
+                What happens next?
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6 text-left">
+                <div class="space-y-4">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-green-100 dark:bg-green-900/50 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                            <i class="fas fa-shield-alt text-green-600 dark:text-green-400 text-sm"></i>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300">Your vote has been securely recorded on the blockchain</p>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                            <i class="fas fa-user-secret text-blue-600 dark:text-blue-400 text-sm"></i>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300">The vote is anonymous and cannot be traced back to you</p>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900/50 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                            <i class="fas fa-eye text-purple-600 dark:text-purple-400 text-sm"></i>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300">You can view the live results anytime</p>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <div class="w-8 h-8 bg-red-100 dark:bg-red-900/50 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                            <i class="fas fa-lock text-red-600 dark:text-red-400 text-sm"></i>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300">The blockchain ensures your vote cannot be tampered with</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="space-y-4">
+            <div class="grid md:grid-cols-2 gap-4">
+                <a href="{{ url_for('results', jurusan='Teknik Informatika') }}" 
+                   class="bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white px-6 py-4 rounded-xl font-medium inline-flex items-center justify-center shadow-md transition-all duration-300">
+                    <i class="fas fa-chart-bar mr-2"></i>
+                    View Results - TI
+                </a>
+                
+                <a href="{{ url_for('results', jurusan='Sistem Informasi') }}" 
+                   class="bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white px-6 py-4 rounded-xl font-medium inline-flex items-center justify-center shadow-md transition-all duration-300">
+                    <i class="fas fa-chart-bar mr-2"></i>
+                    View Results - SI
+                </a>
+            </div>
+            
+            <a href="{{ url_for('blockchain_explorer') }}" 
+               class="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-white px-8 py-4 rounded-xl font-medium inline-flex items-center justify-center shadow-md transition-colors duration-300 w-full max-w-xs mx-auto">
+                <i class="fas fa-link mr-2"></i>
+                Explore Blockchain
+            </a>
+            
+            <div class="flex flex-wrap justify-center gap-4 pt-8">
+                <a href="{{ url_for('index') }}" class="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 px-6 py-3 rounded-xl font-medium inline-flex items-center transition-colors duration-300">
+                    <i class="fas fa-home mr-2"></i>
+                    Back to Home
+                </a>
+                <a href="{{ url_for('logout') }}" class="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 px-6 py-3 rounded-xl font-medium inline-flex items-center transition-colors duration-300">
+                    <i class="fas fa-sign-out-alt mr-2"></i>
+                    Logout
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

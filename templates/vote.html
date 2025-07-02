@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+
+{% block title %}Cast Your Vote - E-Voting{% endblock %}
+
+{% block content %}
+<div class="min-h-screen py-8 px-4">
+    <!-- Header Section -->
+    <div class="text-center mb-8">
+        <div class="w-20 h-20 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-vote-yea text-white text-2xl"></i>
+        </div>
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Cast Your Vote</h1>
+        <p class="text-gray-600 dark:text-gray-300">Select your preferred candidate for department head</p>
+    </div>
+
+    <!-- Voter Information Card -->
+    <div class="max-w-4xl mx-auto mb-8">
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+            <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-user-graduate text-white"></i>
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Voter Information</h3>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Name</p>
+                            <p class="font-semibold text-gray-900 dark:text-white">{{ mahasiswa.nama }}</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Student ID</p>
+                            <p class="font-semibold text-gray-900 dark:text-white">{{ mahasiswa.nim }}</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Department</p>
+                            <p class="font-semibold text-blue-600 dark:text-blue-400">{{ mahasiswa.jurusan }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Candidates Selection -->
+    <div class="max-w-6xl mx-auto mb-8">
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Select Your Candidate</h2>
+                <p class="text-gray-600 dark:text-gray-300">Choose the candidate you want to vote for</p>
+            </div>
+            
+            <form id="voteForm">
+                <div class="grid md:grid-cols-2 gap-4">
+                    {% for candidate in candidates %}
+                    <div class="candidate-card cursor-pointer" data-candidate="{{ candidate.nama }}">
+                        <div class="bg-white dark:bg-gray-700 rounded-lg p-6 border-2 border-transparent hover:border-blue-500 transition-all h-full flex flex-col">
+                            <div class="text-center flex-grow">
+                                <div class="w-16 h-16 bg-gray-300 dark:bg-gray-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+                                    <i class="fas fa-user-tie text-white"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1">{{ candidate.nama }}</h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">Student ID: {{ candidate.nim }}</p>
+                                
+                                <div class="text-left mb-4 space-y-3">
+    <div>
+        <h4 class="font-semibold text-blue-600 dark:text-blue-400 text-sm">Jurusan:</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-300">{{ candidate.jurusan }}</p>
+    </div>
+    <div>
+        <h4 class="font-semibold text-blue-600 dark:text-blue-400 text-sm">Visi:</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-300 whitespace-pre-line">{{ candidate.visi }}</p>
+    </div>
+    <div>
+        <h4 class="font-semibold text-blue-600 dark:text-blue-400 text-sm">Misi:</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-300 whitespace-pre-line">{{ candidate.misi }}</p>
+    </div>
+</div>
+                            </div>
+                            
+                            <!-- Radio Button Selection -->
+                            <div class="flex items-center justify-center space-x-2 mt-auto">
+                                <input 
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500" 
+                                    type="radio" 
+                                    name="candidate" 
+                                    value="{{ candidate.nama }}" 
+                                    id="candidate{{ loop.index }}"
+                                >
+                                <label for="candidate{{ loop.index }}" class="text-sm font-semibold text-gray-900 dark:text-white cursor-pointer">
+                                    Select
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="text-center mt-6">
+                    <button type="submit" id="submitVoteBtn" disabled class="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-lg font-medium text-white disabled:opacity-50 disabled:cursor-not-allowed">
+                        Submit My Vote
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Confirmation Modal (Tetap sama) -->
+<div id="confirmModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow max-w-md w-full p-6">
+        <div class="text-center">
+            <div class="w-16 h-16 bg-yellow-500 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-exclamation-triangle text-white"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Confirm Your Vote</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-2">You are about to vote for:</p>
+            <h4 class="text-lg font-bold text-blue-600 dark:text-blue-400 mb-4" id="selectedCandidate"></h4>
+            <div class="bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded-md p-3 mb-4">
+                <div class="flex items-start space-x-2">
+                    <i class="fas fa-info-circle text-blue-600 mt-1"></i>
+                    <p class="text-xs text-blue-800 dark:text-blue-200">This action cannot be undone.</p>
+                </div>
+            </div>
+            <div class="flex space-x-3">
+                <button onclick="closeModal()" class="flex-1 bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-lg font-medium">
+                    Cancel
+                </button>
+                <button id="confirmVoteBtn" class="flex-1 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-medium text-white">
+                    Confirm Vote
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let selectedCandidate = null;
+
+// Handle candidate selection
+document.querySelectorAll('.candidate-card').forEach(card => {
+    card.addEventListener('click', function() {
+        const candidateName = this.dataset.candidate;
+        const radio = this.querySelector('input[type="radio"]');
+        
+        // Clear previous selections
+        document.querySelectorAll('.candidate-card').forEach(c => {
+            c.querySelector('div').classList.remove('border-blue-500');
+            c.querySelector('input[type="radio"]').checked = false;
+        });
+        
+        // Select current candidate
+        this.querySelector('div').classList.add('border-blue-500');
+        radio.checked = true;
+        selectedCandidate = candidateName;
+        
+        // Enable submit button
+        document.getElementById('submitVoteBtn').disabled = false;
+    });
+});
+
+// Handle form submission
+document.getElementById('voteForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    if (!selectedCandidate) {
+        showToast('Please select a candidate first', 'error');
+        return;
+    }
+    
+    // Show confirmation modal
+    document.getElementById('selectedCandidate').textContent = selectedCandidate;
+    document.getElementById('confirmModal').classList.remove('hidden');
+    document.getElementById('confirmModal').classList.add('flex');
+});
+
+function closeModal() {
+    document.getElementById('confirmModal').classList.add('hidden');
+    document.getElementById('confirmModal').classList.remove('flex');
+}
+
+// Handle vote confirmation
+document.getElementById('confirmVoteBtn').addEventListener('click', async function() {
+    const submitBtn = this;
+    setLoading(submitBtn, true);
+    
+    try {
+        const response = await fetch('/submit_vote', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                candidate: selectedCandidate
+            })
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            showToast(result.message, 'success');
+            closeModal();
+            
+            // Use the redirect URL from the response
+            if (result.redirect) {
+                window.location.href = result.redirect;
+            } else {
+                window.location.href = '/vote-confirmed';
+            }
+        } else {
+            showToast(result.message, 'error');
+        }
+    } catch (error) {
+        showToast('Error submitting vote. Please try again.', 'error');
+    } finally {
+        setLoading(submitBtn, false);
+    }
+});
+</script>
+{% endblock %}

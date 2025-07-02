@@ -1,0 +1,279 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="py-12">
+    <div class="grid lg:grid-cols-2 gap-8 items-center">
+        <div class="space-y-6">
+            <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white">
+                Modern E-Voting System
+            </h1>
+            <p class="text-lg text-gray-600 dark:text-gray-300">
+                Secure, transparent, and decentralized voting system powered by blockchain technology. 
+                Cast your vote for department head elections with complete confidence.
+            </p>
+            
+            <div class="flex flex-wrap gap-3">
+                <a href="{{ url_for('register') }}" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-medium text-white inline-flex items-center">
+                    <i class="fas fa-user-plus mr-2"></i>
+                    Get Started
+                </a>
+                <a href="{{ url_for('blockchain_explorer') }}" class="border border-blue-600 text-blue-600 hover:bg-blue-50 dark:hover:bg-gray-800 px-6 py-3 rounded-lg font-medium inline-flex items-center">
+                    <i class="fas fa-link mr-2"></i>
+                    Explore Blockchain
+                </a>
+            </div>
+            
+            <div class="flex flex-wrap items-center gap-6 text-gray-500 dark:text-gray-400">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-shield-alt text-blue-600"></i>
+                    <span>Secure</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-eye text-blue-600"></i>
+                    <span>Transparent</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-bolt text-blue-600"></i>
+                    <span>Fast</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow">
+            <div class="mb-4">
+                <i class="fas fa-vote-yea text-5xl text-blue-600"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Ready to Vote?</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-6">
+                Join thousands of students who have already participated in our secure blockchain voting system.
+            </p>
+            <div class="grid grid-cols-3 gap-3 text-center">
+                <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded-lg">
+                    <div class="text-xl font-bold text-blue-600" id="totalVoters">-</div>
+                    <div class="text-gray-500 text-sm">Voters</div>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded-lg">
+                    <div class="text-xl font-bold text-green-600" id="totalVotes">-</div>
+                    <div class="text-gray-500 text-sm">Votes</div>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded-lg">
+                    <div class="text-xl font-bold text-purple-600" id="totalBlocks">-</div>
+                    <div class="text-gray-500 text-sm">Blocks</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-12">
+    <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Why Choose Our Platform?</h2>
+        <p class="text-gray-600 dark:text-gray-300">Built with cutting-edge technology for maximum security and transparency</p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+            <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mb-4 mx-auto">
+                <i class="fas fa-shield-alt text-white"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Blockchain Security</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm">
+                Every vote is cryptographically secured and stored on an immutable blockchain ledger.
+            </p>
+        </div>
+        
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+            <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mb-4 mx-auto">
+                <i class="fas fa-eye text-white"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Full Transparency</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm">
+                All voting data is publicly verifiable while maintaining voter anonymity.
+            </p>
+        </div>
+        
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+            <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mb-4 mx-auto">
+                <i class="fas fa-mobile-alt text-white"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Mobile Friendly</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm">
+                Vote from anywhere using your smartphone, tablet, or computer.
+            </p>
+        </div>
+        
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+            <div class="w-12 h-12 bg-orange-600 rounded-lg flex items-center justify-center mb-4 mx-auto">
+                <i class="fas fa-clock text-white"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Real-time Results</h3>
+            <p class="text-gray-600 dark:text-gray-300 text-sm">
+                Watch live vote counts and results update in real-time as votes are cast.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Quick Actions Section -->
+<section class="py-12">
+    <div class="grid lg:grid-cols-2 gap-4">
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+            <div class="flex items-start space-x-3 mb-4">
+                <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-user-graduate text-white"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">For Students</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Register your account and participate in the democratic process</p>
+                </div>
+            </div>
+            <div class="space-y-2">
+                <a href="{{ url_for('register') }}" class="block bg-blue-600 hover:bg-blue-700 px-4 py-3 rounded-lg font-medium text-white text-center">
+                    <i class="fas fa-user-plus mr-2"></i>
+                    Register Now
+                </a>
+                <a href="{{ url_for('login') }}" class="block border border-blue-600 text-blue-600 hover:bg-blue-50 dark:hover:bg-gray-700 px-4 py-3 rounded-lg font-medium text-center">
+                    <i class="fas fa-sign-in-alt mr-2"></i>
+                    Login & Vote
+                </a>
+            </div>
+        </div>
+        
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+            <div class="flex items-start space-x-3 mb-4">
+                <div class="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-chart-bar text-white"></i>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">View Results</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Check real-time voting results for each department</p>
+                </div>
+            </div>
+            <div class="space-y-2">
+                <a href="{{ url_for('results', jurusan='Teknik Informatika') }}" class="block border border-green-600 text-green-600 hover:bg-green-50 dark:hover:bg-gray-700 px-4 py-3 rounded-lg font-medium text-center">
+                    <i class="fas fa-laptop-code mr-2"></i>
+                    Teknik Informatika
+                </a>
+                <a href="{{ url_for('results', jurusan='Sistem Informasi') }}" class="block border border-green-600 text-green-600 hover:bg-green-50 dark:hover:bg-gray-700 px-4 py-3 rounded-lg font-medium text-center">
+                    <i class="fas fa-database mr-2"></i>
+                    Sistem Informasi
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="py-12">
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+        <div class="text-center mb-6">
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                <i class="fas fa-chart-line text-blue-600 mr-2"></i>
+                Live Statistics
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">Real-time data from our blockchain network</p>
+        </div>
+        
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 text-center">
+                <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center mb-2 mx-auto">
+                    <i class="fas fa-users text-white"></i>
+                </div>
+                <div class="text-xl font-bold text-gray-900 dark:text-white" id="statsVoters">-</div>
+                <div class="text-gray-600 dark:text-gray-400 text-sm">Registered Voters</div>
+            </div>
+            
+            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 text-center">
+                <div class="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center mb-2 mx-auto">
+                    <i class="fas fa-user-tie text-white"></i>
+                </div>
+                <div class="text-xl font-bold text-gray-900 dark:text-white" id="statsCandidates">-</div>
+                <div class="text-gray-600 dark:text-gray-400 text-sm">Total Candidates</div>
+            </div>
+            
+            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 text-center">
+                <div class="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center mb-2 mx-auto">
+                    <i class="fas fa-vote-yea text-white"></i>
+                </div>
+                <div class="text-xl font-bold text-gray-900 dark:text-white" id="statsVotes">-</div>
+                <div class="text-gray-600 dark:text-gray-400 text-sm">Votes Cast</div>
+            </div>
+            
+            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 text-center">
+                <div class="w-10 h-10 bg-orange-600 rounded-lg flex items-center justify-center mb-2 mx-auto">
+                    <i class="fas fa-cubes text-white"></i>
+                </div>
+                <div class="text-xl font-bold text-gray-900 dark:text-white" id="statsBlocks">-</div>
+                <div class="text-gray-600 dark:text-gray-400 text-sm">Blockchain Blocks</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-12 text-center">
+    <div class="bg-blue-600 rounded-lg p-8 text-white">
+        <h3 class="text-2xl font-bold mb-3">Ready to Make Your Voice Heard?</h3>
+        <p class="text-blue-100 mb-6 max-w-2xl mx-auto">
+            Join the future of democratic participation with our secure blockchain voting platform.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+            <a href="{{ url_for('register') }}" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 inline-flex items-center">
+                <i class="fas fa-rocket mr-2"></i>
+                Start Voting Now
+            </a>
+            <a href="{{ url_for('blockchain_explorer') }}" class="border border-white text-white px-6 py-3 rounded-lg font-medium hover:bg-white hover:text-blue-600 inline-flex items-center">
+                <i class="fas fa-search mr-2"></i>
+                Explore Technology
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Load live statistics
+    async function loadStats() {
+        try {
+            const response = await fetch('/blockchain_info');
+            const data = await response.json();
+            
+            // Update hero stats
+            document.getElementById('totalBlocks').textContent = data.length;
+            document.getElementById('statsBlocks').textContent = data.length;
+            
+            let totalVotes = 0;
+            data.chain.forEach(block => {
+                if (block.index > 0) {
+                    totalVotes += block.transactions.length;
+                }
+            });
+            
+            document.getElementById('totalVotes').textContent = totalVotes;
+            document.getElementById('statsVotes').textContent = totalVotes;
+            
+            // Simulate other stats (in real app, these would come from API)
+            document.getElementById('totalVoters').textContent = Math.max(totalVotes + 50, 100);
+            document.getElementById('statsVoters').textContent = Math.max(totalVotes + 50, 100);
+            document.getElementById('statsCandidates').textContent = '4';
+            
+        } catch (error) {
+            console.error('Error loading stats:', error);
+        }
+    }
+    
+    // Load stats on page load
+    document.addEventListener('DOMContentLoaded', loadStats);
+    
+    // Update stats every 30 seconds
+    setInterval(loadStats, 30000);
+    
+    // Socket.IO real-time updates
+    socket.on('vote_cast', function(data) {
+        loadStats();
+    });
+</script>
+{% endblock %}

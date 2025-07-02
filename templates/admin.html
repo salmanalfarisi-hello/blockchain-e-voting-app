@@ -1,0 +1,753 @@
+{% extends "admin_base.html" %}
+
+{% block title %}Admin Dashboard - Modern E-Voting{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+{% block page_description %}Overview and management of the e-voting system{% endblock %}
+
+{% block content %}
+<!-- Stats Cards - Compact Design -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    <!-- Total Voters -->
+    <div class="card p-4 hover:shadow transition-all duration-200">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Total Voters</p>
+                <p class="text-xl font-bold dark:text-white">{{ stats.total_voters }}</p>
+                <div class="flex items-center mt-1 text-xs">
+                    <span class="text-green-500 dark:text-green-400 flex items-center">
+                        <svg class="w-3 h-3 mr-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        12%
+                    </span>
+                    <span class="text-gray-400 dark:text-gray-500 ml-1">from last month</span>
+                </div>
+            </div>
+            <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-blue-500 dark:text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Total Candidates -->
+    <div class="card p-4 hover:shadow transition-all duration-200">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Total Candidates</p>
+                <p class="text-xl font-bold dark:text-white">{{ stats.total_candidates }}</p>
+                <div class="flex items-center mt-1 text-xs">
+                    <span class="text-blue-500 dark:text-blue-400 flex items-center">
+                        <svg class="w-3 h-3 mr-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
+                            <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
+                        </svg>
+                        Active
+                    </span>
+                    <span class="text-gray-400 dark:text-gray-500 ml-1">candidates</span>
+                </div>
+            </div>
+            <div class="w-10 h-10 bg-green-100 dark:bg-green-900/50 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                    <path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Total Votes -->
+    <div class="card p-4 hover:shadow transition-all duration-200">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Total Votes</p>
+                <p class="text-xl font-bold dark:text-white">{{ stats.total_votes }}</p>
+                <div class="flex items-center mt-1 text-xs">
+                    <span class="text-purple-500 dark:text-purple-400 flex items-center">
+                        <svg class="w-3 h-3 mr-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
+                        </svg>
+                        Votes
+                    </span>
+                    <span class="text-gray-400 dark:text-gray-500 ml-1">cast today</span>
+                </div>
+            </div>
+            <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-purple-500 dark:text-purple-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Blockchain Blocks -->
+    <div class="card p-4 hover:shadow transition-all duration-200">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Blockchain Blocks</p>
+                <p class="text-xl font-bold dark:text-white">{{ stats.blockchain_blocks }}</p>
+                <div class="flex items-center mt-1 text-xs">
+                    <span class="text-orange-500 dark:text-orange-400 flex items-center">
+                        <svg class="w-3 h-3 mr-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+                        </svg>
+                        Secure
+                    </span>
+                    <span class="text-gray-400 dark:text-gray-500 ml-1">blocks</span>
+                </div>
+            </div>
+            <div class="w-10 h-10 bg-orange-100 dark:bg-orange-900/50 rounded-lg flex items-center justify-center">
+                <svg class="w-5 h-5 text-orange-500 dark:text-orange-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M11 17a1 1 0 001.447.894l4-2A1 1 0 0017 15V9.236a1 1 0 00-1.447-.894l-4 2a1 1 0 00-.553.894V17zM15.211 6.276a1 1 0 000-1.788l-4.764-2.382a1 1 0 00-.894 0L4.789 4.488a1 1 0 000 1.788l4.764 2.382a1 1 0 00.894 0l4.764-2.382zM4.447 8.342A1 1 0 003 9.236V15a1 1 0 00.553.894l4 2A1 1 0 009 17v-5.764a1 1 0 00-.553-.894l-4-2z"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+    <!-- Add Candidate Form - Compact -->
+    <div class="lg:col-span-1">
+        <div class="card p-5">
+            <div class="flex items-center mb-4">
+                <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mr-3">
+                    <svg class="w-5 h-5 text-blue-500 dark:text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold dark:text-white">Add Candidate</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Register new candidate</p>
+                </div>
+            </div>
+            
+            <form id="addCandidateForm" class="space-y-3">
+                <div>
+                    <label for="candidateName" class="block text-xs font-medium mb-1 dark:text-gray-300">
+                        Full Name
+                    </label>
+                    <input 
+                        type="text" 
+                        id="candidateName" 
+                        name="candidateName"
+                        required
+                        class="input w-full text-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                        placeholder="Candidate name"
+                    >
+                </div>
+                
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label for="candidateNim" class="block text-xs font-medium mb-1 dark:text-gray-300">
+                            Student ID (NIM)
+                        </label>
+                        <input 
+                            type="text" 
+                            id="candidateNim" 
+                            name="candidateNim"
+                            required
+                            class="input w-full text-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                            placeholder="Enter NIM"
+                        >
+                    </div>
+                    <div>
+                        <label for="candidateJurusan" class="block text-xs font-medium mb-1 dark:text-gray-300">
+                            Department
+                        </label>
+                        <select 
+                            id="candidateJurusan" 
+                            name="candidateJurusan" 
+                            required 
+                            class="input w-full text-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                        >
+                            <option value="">Select</option>
+                            <option value="Teknik Informatika">Teknik Informatika</option>
+                            <option value="Sistem Informasi">Sistem Informasi</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div>
+                    <label for="candidateVisi" class="block text-xs font-medium mb-1 dark:text-gray-300">
+                        Vision (Visi)
+                    </label>
+                    <textarea 
+                        id="candidateVisi" 
+                        name="candidateVisi"
+                        required
+                        rows="2"
+                        class="input w-full text-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                        placeholder="Candidate's vision"
+                    ></textarea>
+                </div>
+                
+                <div>
+                    <label for="candidateMisi" class="block text-xs font-medium mb-1 dark:text-gray-300">
+                        Mission (Misi)
+                    </label>
+                    <textarea 
+                        id="candidateMisi" 
+                        name="candidateMisi"
+                        required
+                        rows="2"
+                        class="input w-full text-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                        placeholder="Candidate's mission"
+                    ></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary w-full py-2 text-sm">
+                    Add Candidate
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Candidates List - Compact -->
+    <div class="lg:col-span-2">
+        <div class="card p-5">
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mr-3">
+                        <svg class="w-5 h-5 text-blue-500 dark:text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold dark:text-white">All Candidates</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Manage registered candidates</p>
+                    </div>
+                </div>
+                <div class="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-md text-sm">
+                    <span class="font-medium dark:text-white" id="candidateCount">0</span> 
+                    <span class="dark:text-gray-300">candidates</span>
+                </div>
+            </div>
+            
+            <div id="candidatesList" class="space-y-3 max-h-[500px] overflow-y-auto pr-2">
+                <!-- Candidates will be loaded here -->
+                <div class="text-center py-8">
+                    <div class="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-sm font-medium dark:text-white mb-1">Loading candidates...</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Please wait while we load the data</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Section - Compact -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5">
+    <!-- Teknik Informatika Chart -->
+    <div class="card p-5">
+        <div class="flex items-center mb-4">
+            <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mr-3">
+                <svg class="w-5 h-5 text-blue-500 dark:text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+                </svg>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold dark:text-white">Teknik Informatika</h3>
+                <p class="text-xs text-gray-500 dark:text-gray-400">Real-time voting results</p>
+            </div>
+        </div>
+        <div class="h-[250px]">
+            <canvas id="tiChart"></canvas>
+        </div>
+    </div>
+    
+    <!-- Sistem Informasi Chart -->
+    <div class="card p-5">
+        <div class="flex items-center mb-4">
+            <div class="w-10 h-10 bg-green-100 dark:bg-green-900/50 rounded-lg flex items-center justify-center mr-3">
+                <svg class="w-5 h-5 text-green-500 dark:text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
+                </svg>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold dark:text-white">Sistem Informasi</h3>
+                <p class="text-xs text-gray-500 dark:text-gray-400">Real-time voting results</p>
+            </div>
+        </div>
+        <div class="h-[250px]">
+            <canvas id="siChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
+<!-- Edit Modal -->
+<div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
+    <div class="card max-w-md w-full p-5">
+        <div class="text-center mb-4">
+            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mx-auto mb-3">
+                <svg class="w-5 h-5 text-blue-500 dark:text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                </svg>
+            </div>
+            <h3 class="text-xl font-semibold dark:text-white mb-1">Edit Candidate</h3>
+            <p class="text-xs text-gray-500 dark:text-gray-400">Update candidate information</p>
+        </div>
+        
+        <form id="editCandidateForm" class="space-y-3">
+            <input type="hidden" id="editCandidateId" name="candidateId">
+            <div>
+                <label for="editCandidateName" class="block text-xs font-medium mb-1 dark:text-gray-300">
+                    Full Name
+                </label>
+                <input 
+                    type="text" 
+                    id="editCandidateName" 
+                    name="candidateName" 
+                    required 
+                    class="input w-full text-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                >
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <label for="editCandidateNim" class="block text-xs font-medium mb-1 dark:text-gray-300">
+                        Student ID (NIM)
+                    </label>
+                    <input 
+                        type="text" 
+                        id="editCandidateNim" 
+                        name="candidateNim" 
+                        required 
+                        class="input w-full text-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                    >
+                </div>
+                <div>
+                    <label for="editCandidateJurusan" class="block text-xs font-medium mb-1 dark:text-gray-300">
+                        Department
+                    </label>
+                    <select 
+                        id="editCandidateJurusan" 
+                        name="candidateJurusan" 
+                        required 
+                        class="input w-full text-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                    >
+                        <option value="Teknik Informatika">Teknik Informatika</option>
+                        <option value="Sistem Informasi">Sistem Informasi</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <label for="editCandidateVisi" class="block text-xs font-medium mb-1 dark:text-gray-300">
+                    Vision (Visi)
+                </label>
+                <textarea 
+                    id="editCandidateVisi" 
+                    name="candidateVisi"
+                    required
+                    rows="2"
+                    class="input w-full text-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                ></textarea>
+            </div>
+            <div>
+                <label for="editCandidateMisi" class="block text-xs font-medium mb-1 dark:text-gray-300">
+                    Mission (Misi)
+                </label>
+                <textarea 
+                    id="editCandidateMisi" 
+                    name="candidateMisi"
+                    required
+                    rows="2"
+                    class="input w-full text-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+                ></textarea>
+            </div>
+            <div class="flex space-x-2 pt-2">
+                <button 
+                    type="button" 
+                    onclick="closeEditModal()" 
+                    class="btn bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white flex-1 py-2 text-sm"
+                >
+                    Cancel
+                </button>
+                <button type="submit" class="btn btn-primary flex-1 py-2 text-sm">
+                    Save Changes
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Delete Modal -->
+<div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
+    <div class="card max-w-md w-full p-5">
+        <div class="text-center">
+            <div class="w-12 h-12 bg-red-100 dark:bg-red-900/50 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <svg class="w-5 h-5 text-red-500 dark:text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                </svg>
+            </div>
+            <h3 class="text-xl font-semibold dark:text-white mb-2">Delete Candidate</h3>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Are you sure you want to delete:</p>
+            <h4 class="text-lg font-semibold text-red-500 dark:text-red-400 mb-4" id="deleteCandidateName"></h4>
+            <div class="bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-800 rounded-lg p-3 mb-4">
+                <div class="flex items-start space-x-2">
+                    <svg class="w-4 h-4 text-red-500 dark:text-red-400 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                    </svg>
+                    <p class="text-xs text-red-600 dark:text-red-300">This action cannot be undone.</p>
+                </div>
+            </div>
+            <div class="flex space-x-2">
+                <button 
+                    onclick="closeDeleteModal()" 
+                    class="btn bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white flex-1 py-2 text-sm"
+                >
+                    Cancel
+                </button>
+                <button id="confirmDeleteBtn" class="btn btn-danger flex-1 py-2 text-sm">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Simplified and optimized JavaScript
+let tiChart, siChart;
+
+// Utility functions
+function showToast(message, type = 'success') {
+    const toast = document.createElement('div');
+    toast.className = `fixed bottom-4 right-4 px-4 py-2 rounded-md text-white text-sm font-medium ${
+        type === 'success' ? 'bg-green-500' : 'bg-red-500'
+    }`;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
+
+function setLoading(element, isLoading) {
+    if (isLoading) {
+        element.innerHTML = `<svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg> Processing...`;
+        element.disabled = true;
+    } else {
+        element.innerHTML = element.dataset.originalText || element.textContent;
+        element.disabled = false;
+    }
+}
+
+// Candidate management
+async function loadCandidates() {
+    try {
+        const response = await fetch('/admin/candidates');
+        const data = await response.json();
+        const container = document.getElementById('candidatesList');
+        const countElement = document.getElementById('candidateCount');
+        
+        container.innerHTML = '';
+        countElement.textContent = data.candidates.length;
+        
+        if (data.candidates.length === 0) {
+            container.innerHTML = `
+                <div class="text-center py-8">
+                    <div class="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center mx-auto mb-3">
+                        <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-7.536 5.879a1 1 0 001.415 0 3 3 0 014.242 0 1 1 0 001.415-1.415 5 5 0 00-7.072 0 1 1 0 000 1.415z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-sm font-medium dark:text-white mb-1">No candidates found</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Add your first candidate using the form</p>
+                </div>
+            `;
+            return;
+        }
+        
+        data.candidates.forEach(candidate => {
+            const candidateElement = document.createElement('div');
+            candidateElement.className = 'bg-gray-50 dark:bg-gray-800 rounded-lg p-3 border border-gray-200 dark:border-gray-700 hover:shadow transition-all duration-200';
+            candidateElement.innerHTML = `
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-blue-500 dark:text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-medium text-sm truncate dark:text-white">${candidate.nama}</h4>
+                            <p class="text-xs text-gray-600 dark:text-gray-300 truncate">NIM: ${candidate.nim}</p>
+                            <span class="inline-block bg-blue-100 dark:bg-blue-900/50 text-blue-500 dark:text-blue-400 text-xs px-2 py-0.5 rounded-full mt-1">
+                                ${candidate.jurusan}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-1">
+                        <button onclick="openEditModal('${candidate.nim}')" 
+                                class="bg-blue-100 dark:bg-blue-900/50 text-blue-500 dark:text-blue-400 p-1.5 rounded hover:bg-blue-200 dark:hover:bg-blue-800" 
+                                title="Edit">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
+                            </svg>
+                        </button>
+                        <button onclick="openDeleteModal('${candidate.nim}', '${candidate.nama}')" 
+                                class="bg-red-100 dark:bg-red-900/50 text-red-500 dark:text-red-400 p-1.5 rounded hover:bg-red-200 dark:hover:bg-red-800" 
+                                title="Delete">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-2 pt-2 border-t border-gray-200 dark:border-gray-700">
+                    <p class="text-xs font-medium dark:text-gray-200">Visi:</p>
+                    <p class="text-xs text-gray-600 dark:text-gray-400 line-clamp-2">${candidate.visi || 'No vision provided'}</p>
+                    <p class="text-xs font-medium dark:text-gray-200 mt-1">Misi:</p>
+                    <p class="text-xs text-gray-600 dark:text-gray-400 line-clamp-2">${candidate.misi || 'No mission provided'}</p>
+                </div>
+            `;
+            container.appendChild(candidateElement);
+        });
+    } catch (error) {
+        console.error('Error loading candidates:', error);
+        showToast('Error loading candidates', 'error');
+    }
+}
+
+// Form handlers
+document.getElementById('addCandidateForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    submitBtn.dataset.originalText = submitBtn.textContent;
+    setLoading(submitBtn, true);
+    
+    try {
+        const response = await fetch('/admin/candidates', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                nama: document.getElementById('candidateName').value,
+                nim: document.getElementById('candidateNim').value,
+                jurusan: document.getElementById('candidateJurusan').value,
+                visi: document.getElementById('candidateVisi').value,
+                misi: document.getElementById('candidateMisi').value
+            })
+        });
+        
+        const result = await response.json();
+        if (result.success) {
+            showToast(result.message, 'success');
+            e.target.reset();
+            loadCandidates();
+        } else {
+            showToast(result.message || 'Failed to add candidate', 'error');
+        }
+    } catch (error) {
+        showToast('Network error', 'error');
+    } finally {
+        setLoading(submitBtn, false);
+    }
+});
+
+// Edit functions
+async function openEditModal(nim) {
+    try {
+        const response = await fetch(`/admin/candidates/${nim}`);
+        const { candidate } = await response.json();
+        
+        document.getElementById('editCandidateId').value = candidate.nim;
+        document.getElementById('editCandidateName').value = candidate.nama;
+        document.getElementById('editCandidateNim').value = candidate.nim;
+        document.getElementById('editCandidateJurusan').value = candidate.jurusan;
+        document.getElementById('editCandidateVisi').value = candidate.visi;
+        document.getElementById('editCandidateMisi').value = candidate.misi;
+        
+        document.getElementById('editModal').classList.remove('hidden');
+        document.getElementById('editModal').classList.add('flex');
+    } catch (error) {
+        showToast('Error loading candidate data', 'error');
+    }
+}
+
+function closeEditModal() {
+    document.getElementById('editModal').classList.add('hidden');
+    document.getElementById('editModal').classList.remove('flex');
+}
+
+document.getElementById('editCandidateForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const submitBtn = e.target.querySelector('button[type="submit"]');
+    submitBtn.dataset.originalText = submitBtn.textContent;
+    setLoading(submitBtn, true);
+    
+    try {
+        const response = await fetch('/admin/candidates/edit', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                originalNim: document.getElementById('editCandidateId').value,
+                nama: document.getElementById('editCandidateName').value,
+                nim: document.getElementById('editCandidateNim').value,
+                jurusan: document.getElementById('editCandidateJurusan').value,
+                visi: document.getElementById('editCandidateVisi').value,
+                misi: document.getElementById('editCandidateMisi').value
+            })
+        });
+        
+        const result = await response.json();
+        if (result.success) {
+            showToast(result.message, 'success');
+            closeEditModal();
+            loadCandidates();
+        } else {
+            showToast(result.message, 'error');
+        }
+    } catch (error) {
+        showToast('Error updating candidate', 'error');
+    } finally {
+        setLoading(submitBtn, false);
+    }
+});
+
+// Delete functions
+let candidateToDelete = null;
+
+function openDeleteModal(nim, nama) {
+    candidateToDelete = { nim, nama };
+    document.getElementById('deleteCandidateName').textContent = nama;
+    document.getElementById('deleteModal').classList.remove('hidden');
+    document.getElementById('deleteModal').classList.add('flex');
+}
+
+function closeDeleteModal() {
+    document.getElementById('deleteModal').classList.add('hidden');
+    document.getElementById('deleteModal').classList.remove('flex');
+    candidateToDelete = null;
+}
+
+document.getElementById('confirmDeleteBtn').addEventListener('click', async function() {
+    if (!candidateToDelete) return;
+    
+    const submitBtn = this;
+    submitBtn.dataset.originalText = submitBtn.textContent;
+    setLoading(submitBtn, true);
+    
+    try {
+        const response = await fetch(`/admin/candidates/${candidateToDelete.nim}`, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' }
+        });
+        
+        const result = await response.json();
+        if (result.success) {
+            showToast(result.message, 'success');
+            closeDeleteModal();
+            loadCandidates();
+        } else {
+            showToast(result.message, 'error');
+        }
+    } catch (error) {
+        showToast('Error deleting candidate', 'error');
+    } finally {
+        setLoading(submitBtn, false);
+    }
+});
+
+// Charts
+async function loadResults() {
+    try {
+        const [tiResponse, siResponse] = await Promise.all([
+            fetch('/api/results/Teknik Informatika'),
+            fetch('/api/results/Sistem Informasi')
+        ]);
+        
+        const [tiData, siData] = await Promise.all([
+            tiResponse.json(),
+            siResponse.json()
+        ]);
+        
+        const isDark = document.documentElement.classList.contains('dark');
+        const textColor = isDark ? '#e5e7eb' : '#374151';
+        
+        // TI Chart
+        if (tiChart) tiChart.destroy();
+        tiChart = new Chart(document.getElementById('tiChart'), {
+            type: 'doughnut',
+            data: {
+                labels: Object.keys(tiData),
+                datasets: [{
+                    data: Object.values(tiData),
+                    backgroundColor: ['#3b82f6', '#06b6d4', '#8b5cf6', '#f59e0b', '#ef4444'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: textColor, font: { size: 10 } }
+                    }
+                }
+            }
+        });
+        
+        // SI Chart
+        if (siChart) siChart.destroy();
+        siChart = new Chart(document.getElementById('siChart'), {
+            type: 'doughnut',
+            data: {
+                labels: Object.keys(siData),
+                datasets: [{
+                    data: Object.values(siData),
+                    backgroundColor: ['#10b981', '#06b6d4', '#8b5cf6', '#f59e0b', '#ef4444'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: textColor, font: { size: 10 } }
+                    }
+                }
+            }
+        });
+    } catch (error) {
+        console.error('Error loading results:', error);
+    }
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+    loadCandidates();
+    loadResults();
+    
+    // Watch for theme changes to update charts
+    new MutationObserver(() => loadResults()).observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class']
+    });
+});
+
+// Socket events (simplified)
+const socketEvents = {
+    'candidate_added': loadCandidates,
+    'candidate_updated': loadCandidates,
+    'candidate_deleted': loadCandidates,
+    'vote_cast': loadResults
+};
+
+Object.entries(socketEvents).forEach(([event, handler]) => {
+    socket.on(event, handler);
+});
+</script>
+{% endblock %}

@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block title %}Login - E-Voting{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center py-8 px-4 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div class="max-w-md w-full space-y-8">
+        <!-- Header -->
+        <div class="text-center">
+            <div class="w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-500 rounded-xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                <i class="fas fa-sign-in-alt text-white text-3xl"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Welcome Back</h2>
+            <p class="mt-2 text-gray-600 dark:text-gray-300">Login to cast your vote securely</p>
+        </div>
+
+        <!-- Login Form -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+            <form id="loginForm" class="p-6 space-y-6">
+                <div>
+                    <label for="nim" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Student ID (NIM)
+                    </label>
+                    <input 
+                        type="text" 
+                        id="nim" 
+                        name="nim"
+                        required
+                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-300"
+                        placeholder="Enter your NIM"
+                    >
+                </div>
+                
+                <div>
+                    <label for="jurusan" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Department
+                    </label>
+                    <select 
+                        id="jurusan" 
+                        name="jurusan" 
+                        required 
+                        class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-300"
+                    >
+                        <option value="">Select your department</option>
+                        <option value="Teknik Informatika">Teknik Informatika</option>
+                        <option value="Sistem Informasi">Sistem Informasi</option>
+                    </select>
+                </div>
+                
+                <button 
+                    type="submit" 
+                    class="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white px-6 py-3 rounded-lg font-medium shadow-md transition-all duration-300 flex items-center justify-center"
+                >
+                    <span id="submitText">Login & Vote</span>
+                    <svg id="submitSpinner" class="hidden w-5 h-5 ml-2 text-white animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                </button>
+            </form>
+        </div>
+
+        <!-- Register Link -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+            <div class="p-6 text-center">
+                <p class="text-gray-600 dark:text-gray-300 mb-4">Don't have an account?</p>
+                <a 
+                    href="{{ url_for('register') }}" 
+                    class="inline-block w-full border border-blue-600 text-blue-600 hover:bg-blue-50 dark:hover:bg-gray-700 px-6 py-2 rounded-lg font-medium transition-colors duration-300"
+                >
+                    Register Here
+                </a>
+            </div>
+        </div>
+
+        <!-- Voting Process Info -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+            <div class="p-6">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 text-center">
+                    Voting Process
+                </h3>
+                <div class="grid grid-cols-3 gap-4 text-center">
+                    <div class="space-y-2">
+                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mx-auto">
+                            <i class="fas fa-sign-in-alt text-blue-600 dark:text-blue-400 text-xl"></i>
+                        </div>
+                        <p class="text-sm font-medium text-gray-600 dark:text-gray-300">1. Login</p>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mx-auto">
+                            <i class="fas fa-vote-yea text-blue-600 dark:text-blue-400 text-xl"></i>
+                        </div>
+                        <p class="text-sm font-medium text-gray-600 dark:text-gray-300">2. Vote</p>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mx-auto">
+                            <i class="fas fa-check-circle text-blue-600 dark:text-blue-400 text-xl"></i>
+                        </div>
+                        <p class="text-sm font-medium text-gray-600 dark:text-gray-300">3. Confirm</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('loginForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const form = e.target;
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const submitText = document.getElementById('submitText');
+    const spinner = document.getElementById('submitSpinner');
+    
+    // Show loading state
+    submitText.textContent = 'Authenticating...';
+    spinner.classList.remove('hidden');
+    submitBtn.disabled = true;
+    
+    const formData = {
+        nim: document.getElementById('nim').value.trim(),
+        jurusan: document.getElementById('jurusan').value
+    };
+    
+    // Simple validation
+    if (!formData.nim || !formData.jurusan) {
+        showToast('Please fill all required fields', 'error');
+        resetButton();
+        return;
+    }
+    
+    try {
+        const response = await fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            showToast(result.message, 'success');
+            setTimeout(() => {
+                // Gunakan redirect URL dari response jika ada
+                window.location.href = result.redirect || '/vote';
+            }, 1500);
+        } else {
+            showToast(result.message || 'Login failed', 'error');
+        }
+    } catch (error) {
+        console.error('Login error:', error);
+        showToast('Network error. Please try again.', 'error');
+    } finally {
+        resetButton();
+    }
+    
+    function resetButton() {
+        submitText.textContent = 'Login & Vote';
+        spinner.classList.add('hidden');
+        submitBtn.disabled = false;
+    }
+});
+</script>
+{% endblock %}

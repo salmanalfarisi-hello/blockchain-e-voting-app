@@ -1,0 +1,334 @@
+{% extends "base.html" %}
+
+{% block title %}Blockchain Explorer - E-Voting{% endblock %}
+
+{% block content %}
+<div class="min-h-screen py-8 px-4">
+    <!-- Header Section -->
+    <div class="text-center mb-8">
+        <div class="w-20 h-20 bg-purple-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-cubes text-white text-2xl"></i>
+        </div>
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Blockchain Explorer</h1>
+        <p class="text-gray-600 dark:text-gray-300">Explore the immutable voting ledger</p>
+    </div>
+
+    <!-- Blockchain Stats -->
+    <div class="max-w-6xl mx-auto mb-8">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow text-center">
+                <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-2">
+                    <i class="fas fa-link text-white"></i>
+                </div>
+                <div class="text-xl font-bold text-gray-900 dark:text-white" id="chainLength">-</div>
+                <div class="text-gray-600 dark:text-gray-400 text-sm">Total Blocks</div>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow text-center">
+                <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mx-auto mb-2">
+                    <i class="fas fa-check-circle text-white"></i>
+                </div>
+                <div class="text-xl font-bold text-gray-900 dark:text-white" id="chainValid">-</div>
+                <div class="text-gray-600 dark:text-gray-400 text-sm">Chain Status</div>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow text-center">
+                <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mx-auto mb-2">
+                    <i class="fas fa-vote-yea text-white"></i>
+                </div>
+                <div class="text-xl font-bold text-gray-900 dark:text-white" id="totalTransactions">-</div>
+                <div class="text-gray-600 dark:text-gray-400 text-sm">Total Votes</div>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow text-center">
+                <div class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center mx-auto mb-2">
+                    <i class="fas fa-clock text-white"></i>
+                </div>
+                <div class="text-xl font-bold text-gray-900 dark:text-white" id="lastUpdate">-</div>
+                <div class="text-gray-600 dark:text-gray-400 text-sm">Last Update</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blockchain Visualization -->
+    <div class="max-w-7xl mx-auto mb-8">
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+                Blockchain Structure
+            </h2>
+            <div class="overflow-x-auto pb-4">
+                <div id="blockchainContainer" class="flex gap-4 min-w-max">
+                    <!-- Blocks will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Block Details -->
+    <div class="max-w-7xl mx-auto">
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+                Block Details
+            </h2>
+            <div id="blockDetails">
+                <div class="text-center py-12">
+                    <div class="w-16 h-16 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-mouse-pointer text-gray-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Select a Block</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Click on a block above to view its details</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Verification Modal -->
+<div id="verifyModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50 p-4">
+    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg max-w-md w-full p-6">
+        <div class="text-center">
+            <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-shield-alt text-blue-600 dark:text-blue-400 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Verify Transaction</h3>
+            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-4">
+                <p class="font-mono text-sm break-all" id="verifyHash"></p>
+            </div>
+            <div id="verifyResult" class="mb-4 hidden">
+                <div class="flex items-center justify-center">
+                    <span id="verifyIcon" class="text-2xl mr-2"></span>
+                    <span id="verifyText" class="font-bold"></span>
+                </div>
+            </div>
+            <div class="flex space-x-3">
+                <button onclick="document.getElementById('verifyModal').classList.add('hidden')" 
+                        class="flex-1 bg-gray-200 dark:bg-gray-600 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-lg font-medium">
+                    Close
+                </button>
+                <button onclick="verifyTransaction()" 
+                        class="flex-1 bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-medium text-white">
+                    Verify
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let blockchainData = null;
+let currentVerifyHash = null;
+
+async function loadBlockchain() {
+    try {
+        const response = await fetch('/blockchain_info');
+        blockchainData = await response.json();
+        
+        document.getElementById('chainLength').textContent = blockchainData.length;
+        document.getElementById('chainValid').textContent = blockchainData.is_valid ? '✓ Valid' : '✗ Invalid';
+        
+        let totalTx = 0;
+        blockchainData.chain.forEach(block => {
+            if (block.index > 0) totalTx += block.transactions.length;
+        });
+        document.getElementById('totalTransactions').textContent = totalTx;
+        document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
+        
+        renderBlockchain();
+        
+    } catch (error) {
+        console.error('Error loading blockchain:', error);
+        showToast('Error loading blockchain data', 'error');
+    }
+}
+
+function renderBlockchain() {
+    const container = document.getElementById('blockchainContainer');
+    container.innerHTML = '';
+    
+    blockchainData.chain.forEach((block, index) => {
+        const blockElement = document.createElement('div');
+        blockElement.className = 'cursor-pointer';
+        
+        const isGenesis = index === 0;
+        const bgClass = isGenesis ? 'bg-gray-600' : 'bg-blue-600';
+        
+        blockElement.innerHTML = `
+            <div class="${bgClass} rounded-lg p-4 text-white min-w-[200px] shadow">
+                <div class="text-center">
+                    <div class="w-12 h-12 bg-white bg-opacity-20 rounded-lg flex items-center justify-center mx-auto mb-2">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <h3 class="font-bold mb-1">Block #${block.index}</h3>
+                    <p class="text-xs opacity-75 mb-2">
+                        ${new Date(block.timestamp * 1000).toLocaleString()}
+                    </p>
+                    <div class="bg-white bg-opacity-20 rounded-md p-2 mb-2">
+                        <span class="font-medium">
+                            ${block.transactions.length} ${block.transactions.length === 1 ? 'vote' : 'votes'}
+                        </span>
+                    </div>
+                    <div class="text-xs opacity-75 font-mono break-all">
+                        ${block.hash.substring(0, 12)}...
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        blockElement.addEventListener('click', () => showBlockDetails(block));
+        
+        container.appendChild(blockElement);
+    });
+}
+
+function showBlockDetails(block) {
+    const detailsContainer = document.getElementById('blockDetails');
+    
+    const transactionsHtml = block.transactions.map(tx => `
+        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-3">
+            <div class="grid md:grid-cols-5 gap-3">
+                <div>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Voter</p>
+                    <p class="font-semibold text-sm text-gray-900 dark:text-white">
+                        ${tx.voter_id}
+                        <span class="block text-xs text-gray-500 dark:text-gray-400">${tx.voter_department}</span>
+                    </p>
+                </div>
+                <div>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Voted For</p>
+                    <p class="font-semibold text-blue-600 dark:text-blue-400 text-sm">
+                        ${tx.candidate}
+                        <span class="block text-xs text-gray-500 dark:text-gray-400">${tx.candidate_department}</span>
+                    </p>
+                </div>
+                <div>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Time</p>
+                    <p class="font-semibold text-gray-900 dark:text-white text-xs">
+                        ${new Date(tx.timestamp * 1000).toLocaleTimeString()}
+                    </p>
+                </div>
+                <div class="md:col-span-2">
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Transaction Hash</p>
+                    <div class="bg-white dark:bg-gray-600 rounded-md p-2">
+                        <p class="font-mono text-xs text-gray-900 dark:text-white break-all hover:text-clip overflow-x-auto cursor-pointer"
+                           onclick="showVerifyModal('${tx.tx_hash}')"
+                           title="Click to verify">
+                            ${tx.tx_hash}
+                        </p>
+                        <button onclick="copyToClipboard('${tx.tx_hash}')" 
+                                class="mt-1 text-xs text-blue-600 dark:text-blue-400 hover:underline">
+                            <i class="fas fa-copy mr-1"></i>Copy
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `).join('');
+    
+    detailsContainer.innerHTML = `
+        <div class="grid lg:grid-cols-2 gap-4 mb-6">
+            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Block Information</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Index</p>
+                        <p class="font-bold text-gray-900 dark:text-white">#${block.index}</p>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Nonce</p>
+                        <p class="font-bold text-gray-900 dark:text-white">${block.nonce}</p>
+                    </div>
+                    <div class="col-span-2">
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Timestamp</p>
+                        <p class="font-semibold text-gray-900 dark:text-white text-sm">${new Date(block.timestamp * 1000).toLocaleString()}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">Hash Information</h3>
+                <div class="space-y-3">
+                    <div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Block Hash</p>
+                        <div class="bg-white dark:bg-gray-600 rounded-md p-2">
+                            <p class="font-mono text-xs text-gray-900 dark:text-white break-all">${block.hash}</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Previous Hash</p>
+                        <div class="bg-white dark:bg-gray-600 rounded-md p-2">
+                            <p class="font-mono text-xs text-gray-900 dark:text-white break-all">${block.previous_hash}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">
+                Transactions (${block.transactions.length})
+            </h3>
+            <div class="space-y-3">
+                ${block.transactions.length > 0 ? transactionsHtml : `
+                <div class="text-center py-8">
+                    <div class="w-12 h-12 bg-gray-200 dark:bg-gray-600 rounded-lg flex items-center justify-center mx-auto mb-2">
+                        <i class="fas fa-inbox text-gray-400"></i>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm">No transactions in this block</p>
+                </div>`}
+            </div>
+        </div>
+    `;
+}
+
+function showVerifyModal(hash) {
+    currentVerifyHash = hash;
+    document.getElementById('verifyHash').textContent = hash;
+    document.getElementById('verifyResult').classList.add('hidden');
+    document.getElementById('verifyModal').classList.remove('hidden');
+    document.getElementById('verifyModal').classList.add('flex');
+}
+
+async function verifyTransaction() {
+    try {
+        const response = await fetch(`/api/verify_tx?hash=${currentVerifyHash}`);
+        const result = await response.json();
+        
+        const verifyResult = document.getElementById('verifyResult');
+        verifyResult.classList.remove('hidden');
+        
+        if(result.valid) {
+            document.getElementById('verifyIcon').innerHTML = '✅';
+            document.getElementById('verifyIcon').className = 'text-2xl mr-2 text-green-500';
+            document.getElementById('verifyText').textContent = 'Transaction is valid';
+            document.getElementById('verifyText').className = 'font-bold text-green-500';
+        } else {
+            document.getElementById('verifyIcon').innerHTML = '❌';
+            document.getElementById('verifyIcon').className = 'text-2xl mr-2 text-red-500';
+            document.getElementById('verifyText').textContent = result.message || 'Transaction is invalid';
+            document.getElementById('verifyText').className = 'font-bold text-red-500';
+        }
+    } catch (error) {
+        console.error('Verification error:', error);
+        showToast('Error verifying transaction', 'error');
+    }
+}
+
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        showToast('Hash copied to clipboard!', 'success');
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+        showToast('Failed to copy hash', 'error');
+    });
+}
+
+document.addEventListener('DOMContentLoaded', loadBlockchain);
+setInterval(loadBlockchain, 30000);
+
+socket.on('vote_cast', function(data) {
+    setTimeout(loadBlockchain, 2000);
+});
+</script>
+{% endblock %}

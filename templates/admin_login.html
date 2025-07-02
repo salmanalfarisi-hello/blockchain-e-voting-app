@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Modern E-Voting</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slide-in': 'slideIn 0.6s ease-out',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-20px) rotate(5deg)' }
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 20px rgba(59, 130, 246, 0.5)' },
+                            '100%': { boxShadow: '0 0 40px rgba(59, 130, 246, 0.8), 0 0 60px rgba(59, 130, 246, 0.6)' }
+                        },
+                        slideIn: {
+                            '0%': { opacity: '0', transform: 'translateX(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
+                        }
+                    },
+                    backdropBlur: {
+                        xs: '2px',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        /* Ensure proper scrolling */
+        html, body {
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+        /* Glass morphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .dark .glass {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Modern gradient background */
+        .admin-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .admin-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="50" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="30" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        }
+        
+        /* Modern input styles */
+        .modern-input {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .modern-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-2px);
+        }
+        
+        .dark .modern-input {
+            background: rgba(30, 41, 59, 0.95);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .dark .modern-input:focus {
+            background: rgba(30, 41, 59, 1);
+            border-color: #667eea;
+        }
+        
+        /* Modern button styles */
+        .modern-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .modern-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .modern-btn:hover::before {
+            left: 100%;
+        }
+        
+        .modern-btn:hover {
+            background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+        
+        /* Floating elements */
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .floating-element:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 20%;
+            right: 10%;
+            animation-delay: -2s;
+        }
+        
+        .floating-element:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: -4s;
+        }
+        
+        .floating-element:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            bottom: 10%;
+            right: 20%;
+            animation-delay: -6s;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .glass {
+                padding: 1.5rem !important;
+            }
+            
+            .text-5xl {
+                font-size: 2.5rem !important;
+            }
+            
+            .text-2xl {
+                font-size: 1.5rem !important;
+            }
+            
+            .grid-cols-2 {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+        }
+
+        @media (max-height: 800px) {
+            body {
+                align-items: flex-start;
+                padding-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen admin-gradient flex items-center justify-center p-4 relative overflow-y-auto">
+    <!-- Floating Background Elements -->
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    <div class="floating-element"></div>
+    
+    <!-- Login Container -->
+    <div class="relative z-10 w-full max-w-lg my-8">
+        <!-- Header -->
+        <div class="text-center mb-10 animate-fade-in-up">
+            <div class="w-24 h-24 glass rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-2xl animate-glow">
+                <i class="fas fa-shield-alt text-white text-4xl"></i>
+            </div>
+            <h1 class="text-5xl font-bold text-white mb-4">Admin Portal</h1>
+            <p class="text-xl text-white text-opacity-90">Secure administrative access to the e-voting system</p>
+        </div>
+
+        <!-- Login Form -->
+        <div class="glass rounded-3xl shadow-2xl p-10 backdrop-blur-lg animate-fade-in-up mb-8" style="animation-delay: 0.2s;">
+            <!-- Security Alert -->
+            <div class="bg-white bg-opacity-10 border border-white border-opacity-20 rounded-2xl p-6 mb-8">
+                <div class="flex items-start space-x-4">
+                    <i class="fas fa-shield-alt text-yellow-300 mt-1 text-xl flex-shrink-0"></i>
+                    <div>
+                        <h3 class="font-bold text-white mb-2 text-lg">Restricted Access Zone</h3>
+                        <p class="text-white text-opacity-80 text-sm">This area is restricted to authorized administrators only. All access attempts are monitored and logged.</p>
+                    </div>
+                </div>
+            </div>
+
+            <form id="adminLoginForm" class="space-y-8">
+                <div>
+                    <label for="username" class="block text-lg font-semibold text-white mb-4">
+                        <i class="fas fa-user-shield text-blue-300 mr-3"></i>
+                        Administrator Username
+                    </label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username"
+                        required
+                        class="modern-input w-full px-6 py-4 rounded-2xl text-lg"
+                        placeholder="Enter admin username"
+                        autocomplete="username"
+                    >
+                </div>
+                
+                <div>
+                    <label for="password" class="block text-lg font-semibold text-white mb-4">
+                        <i class="fas fa-lock text-blue-300 mr-3"></i>
+                        Password
+                    </label>
+                    <div class="relative">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password"
+                            required
+                            class="modern-input w-full px-6 py-4 pr-16 rounded-2xl text-lg"
+                            placeholder="Enter admin password"
+                            autocomplete="current-password"
+                        >
+                        <button 
+                            type="button" 
+                            id="togglePassword"
+                            class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors duration-200 p-2"
+                        >
+                            <i class="fas fa-eye text-xl" id="passwordIcon"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="flex items-center justify-between flex-wrap gap-4">
+                    <div class="flex items-center">
+                        <input 
+                            id="remember" 
+                            name="remember" 
+                            type="checkbox" 
+                            class="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded bg-white"
+                        >
+                        <label for="remember" class="ml-3 block text-white text-opacity-90 text-sm">
+                            Remember this device for 30 days
+                        </label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="modern-btn w-full px-8 py-5 rounded-2xl text-white font-bold text-xl shadow-2xl">
+                    <i class="fas fa-sign-in-alt mr-3"></i>
+                    Access Admin Panel
+                </button>
+            </form>
+        </div>
+
+        <!-- Security Features -->
+        <div class="glass rounded-2xl p-8 mb-8 animate-fade-in-up" style="animation-delay: 0.4s;">
+            <h3 class="text-2xl font-bold text-white mb-6 text-center">
+                <i class="fas fa-shield-alt mr-3"></i>
+                Security Features
+            </h3>
+            <div class="grid grid-cols-2 gap-6 text-center">
+                <div class="space-y-3">
+                    <div class="w-16 h-16 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto">
+                        <i class="fas fa-fingerprint text-white text-2xl"></i>
+                    </div>
+                    <p class="text-white text-opacity-90 font-medium text-sm">Multi-Factor Authentication</p>
+                </div>
+                <div class="space-y-3">
+                    <div class="w-16 h-16 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto">
+                        <i class="fas fa-history text-white text-2xl"></i>
+                    </div>
+                    <p class="text-white text-opacity-90 font-medium text-sm">Activity Logging</p>
+                </div>
+                <div class="space-y-3">
+                    <div class="w-16 h-16 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto">
+                        <i class="fas fa-clock text-white text-2xl"></i>
+                    </div>
+                    <p class="text-white text-opacity-90 font-medium text-sm">Session Timeout</p>
+                </div>
+                <div class="space-y-3">
+                    <div class="w-16 h-16 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto">
+                        <i class="fas fa-certificate text-white text-2xl"></i>
+                    </div>
+                    <p class="text-white text-opacity-90 font-medium text-sm">SSL Encrypted</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back to Main Site -->
+        <div class="text-center mb-8 animate-fade-in-up" style="animation-delay: 0.6s;">
+            <a href="{{ url_for('index') }}" class="text-white text-opacity-80 hover:text-white transition-colors duration-200 inline-flex items-center text-lg">
+                <i class="fas fa-arrow-left mr-3"></i>
+                Back to Main Site
+            </a>
+        </div>
+
+        <!-- Login Attempts Warning -->
+        <div id="loginAttempts" class="hidden glass border border-red-400 rounded-2xl p-6 mb-8">
+            <div class="flex items-start space-x-4">
+                <i class="fas fa-exclamation-triangle text-red-400 mt-1 text-xl flex-shrink-0"></i>
+                <div>
+                    <h4 class="font-bold text-red-200 mb-2 text-lg">Security Alert</h4>
+                    <p class="text-red-300 text-sm">Multiple failed login attempts detected. Please contact system administrator if you're having trouble accessing your account.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Container -->
+    <div id="toastContainer" class="fixed top-6 right-6 z-50 space-y-3"></div>
+
+    <script>
+        let loginAttempts = 0;
+        const maxAttempts = 3;
+
+        // Theme detection
+        const savedTheme = localStorage.getItem('admin-theme') || 'light';
+        if (savedTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+        }
+
+        // Password visibility toggle
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const passwordIcon = document.getElementById('passwordIcon');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordIcon.className = 'fas fa-eye-slash text-xl';
+            } else {
+                passwordInput.type = 'password';
+                passwordIcon.className = 'fas fa-eye text-xl';
+            }
+        });
+
+        // Toast notifications
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toastId = 'toast-' + Date.now();
+            
+            const colors = {
+                success: 'from-green-500 to-emerald-600',
+                error: 'from-red-500 to-red-600',
+                info: 'from-blue-500 to-blue-600',
+                warning: 'from-yellow-500 to-orange-500'
+            };
+            
+            const icons = {
+                success: 'check-circle',
+                error: 'exclamation-triangle',
+                info: 'info-circle',
+                warning: 'exclamation-triangle'
+            };
+            
+            const toast = document.createElement('div');
+            toast.id = toastId;
+            toast.className = `bg-gradient-to-r ${colors[type]} text-white px-6 py-4 rounded-2xl shadow-lg transform transition-all duration-500 translate-x-full opacity-0 max-w-sm glass`;
+            toast.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas fa-${icons[type]} mr-3 text-lg"></i>
+                    <span class="flex-1 font-medium">${message}</span>
+                    <button onclick="removeToast('${toastId}')" class="ml-4 text-white hover:text-gray-200 transition-colors">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.remove('translate-x-full', 'opacity-0');
+            }, 100);
+            
+            setTimeout(() => {
+                removeToast(toastId);
+            }, 5000);
+        }
+        
+        function removeToast(toastId) {
+            const toast = document.getElementById(toastId);
+            if (toast) {
+                toast.classList.add('translate-x-full', 'opacity-0');
+                setTimeout(() => toast.remove(), 500);
+            }
+        }
+
+        // Form validation
+        function validateForm(formId) {
+            const form = document.getElementById(formId);
+            const inputs = form.querySelectorAll('input[required], select[required]');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.classList.add('border-red-500', 'ring-red-500');
+                    input.classList.remove('border-gray-300', 'dark:border-gray-600');
+                    isValid = false;
+                } else {
+                    input.classList.remove('border-red-500', 'ring-red-500');
+                    input.classList.add('border-gray-300', 'dark:border-gray-600');
+                }
+            });
+            
+            return isValid;
+        }
+
+        // Loading state helper
+        function setLoading(element, loading = true) {
+            if (loading) {
+                element.disabled = true;
+                const originalText = element.innerHTML;
+                element.setAttribute('data-original-text', originalText);
+                element.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Authenticating...';
+            } else {
+                element.disabled = false;
+                const originalText = element.getAttribute('data-original-text');
+                if (originalText) {
+                    element.innerHTML = originalText;
+                }
+            }
+        }
+
+        // Admin login form submission
+        document.getElementById('adminLoginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!validateForm('adminLoginForm')) {
+                showToast('Please fill all required fields', 'error');
+                return;
+            }
+            
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            setLoading(submitBtn, true);
+            
+            const formData = {
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value,
+                remember: document.getElementById('remember').checked
+            };
+            
+            try {
+                const response = await fetch('/admin/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    showToast('Authentication successful! Redirecting...', 'success');
+                    
+                    // Clear any previous failed attempts
+                    loginAttempts = 0;
+                    document.getElementById('loginAttempts').classList.add('hidden');
+                    
+                    setTimeout(() => {
+                        window.location.href = '/admin';
+                    }, 1500);
+                } else {
+                    loginAttempts++;
+                    showToast(result.message || 'Invalid credentials', 'error');
+                    
+                    // Show security warning after multiple failed attempts
+                    if (loginAttempts >= maxAttempts) {
+                        document.getElementById('loginAttempts').classList.remove('hidden');
+                        
+                        // Temporarily disable the form
+                        const inputs = document.querySelectorAll('#adminLoginForm input');
+                        const submitButton = document.querySelector('#adminLoginForm button[type="submit"]');
+                        
+                        inputs.forEach(input => input.disabled = true);
+                        submitButton.disabled = true;
+                        
+                        showToast('Too many failed attempts. Please wait 30 seconds.', 'warning');
+                        
+                        setTimeout(() => {
+                            inputs.forEach(input => input.disabled = false);
+                            submitButton.disabled = false;
+                            loginAttempts = 0;
+                            document.getElementById('loginAttempts').classList.add('hidden');
+                        }, 30000);
+                    }
+                    
+                    // Clear password field on failed attempt
+                    document.getElementById('password').value = '';
+                }
+            } catch (error) {
+                showToast('Connection error. Please try again.', 'error');
+                console.error('Admin login error:', error);
+            } finally {
+                setLoading(submitBtn, false);
+            }
+        });
+
+        // Enhanced security: Clear form on page unload
+        window.addEventListener('beforeunload', function() {
+            document.getElementById('adminLoginForm').reset();
+        });
+
+        // Auto-focus username field
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('username').focus();
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + Enter to submit form
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                document.getElementById('adminLoginForm').dispatchEvent(new Event('submit'));
+            }
+        });
+
+        // Session timeout warning (simulate)
+        let sessionWarningShown = false;
+        setTimeout(() => {
+            if (!sessionWarningShown) {
+                showToast('Session will expire in 5 minutes due to inactivity', 'warning');
+                sessionWarningShown = true;
+            }
+        }, 25 * 60 * 1000); // 25 minutes
+    </script>
+</body>
+</html>
