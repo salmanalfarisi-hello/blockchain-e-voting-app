@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 
+<<<<<<< HEAD
 {% block title %}Login - E-Voting{% endblock %}
+=======
+{% block title %}Login - E-Voting Ketua Himpunan TI{% endblock %}
+>>>>>>> 1e614d5 (pesan commit baru di sini)
 
 {% block content %}
 <div class="min-h-screen flex items-center justify-center py-8 px-4 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
@@ -10,8 +14,13 @@
             <div class="w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-500 rounded-xl flex items-center justify-center mx-auto mb-6 shadow-lg">
                 <i class="fas fa-sign-in-alt text-white text-3xl"></i>
             </div>
+<<<<<<< HEAD
             <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Welcome Back</h2>
             <p class="mt-2 text-gray-600 dark:text-gray-300">Login to cast your vote securely</p>
+=======
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Selamat Datang</h2>
+            <p class="mt-2 text-gray-600 dark:text-gray-300">Masuk untuk memberikan suara Anda dengan aman</p>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
         </div>
 
         <!-- Login Form -->
@@ -19,7 +28,11 @@
             <form id="loginForm" class="p-6 space-y-6">
                 <div>
                     <label for="nim" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+<<<<<<< HEAD
                         Student ID (NIM)
+=======
+                        Nomor Induk Mahasiswa (NIM)
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                     </label>
                     <input 
                         type="text" 
@@ -27,13 +40,21 @@
                         name="nim"
                         required
                         class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-300"
+<<<<<<< HEAD
                         placeholder="Enter your NIM"
+=======
+                        placeholder="Masukkan NIM Anda"
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                     >
                 </div>
                 
                 <div>
                     <label for="jurusan" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+<<<<<<< HEAD
                         Department
+=======
+                        Jurusan
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                     </label>
                     <select 
                         id="jurusan" 
@@ -41,9 +62,14 @@
                         required 
                         class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white transition-colors duration-300"
                     >
+<<<<<<< HEAD
                         <option value="">Select your department</option>
                         <option value="Teknik Informatika">Teknik Informatika</option>
                         <option value="Sistem Informasi">Sistem Informasi</option>
+=======
+                        <option value="">Pilih jurusan Anda</option>
+                        <option value="Teknik Informatika">Teknik Informatika</option>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                     </select>
                 </div>
                 
@@ -51,7 +77,11 @@
                     type="submit" 
                     class="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white px-6 py-3 rounded-lg font-medium shadow-md transition-all duration-300 flex items-center justify-center"
                 >
+<<<<<<< HEAD
                     <span id="submitText">Login & Vote</span>
+=======
+                    <span id="submitText">Masuk & Memilih</span>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                     <svg id="submitSpinner" class="hidden w-5 h-5 ml-2 text-white animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -63,12 +93,20 @@
         <!-- Register Link -->
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-200 dark:border-gray-700 transition-colors duration-300">
             <div class="p-6 text-center">
+<<<<<<< HEAD
                 <p class="text-gray-600 dark:text-gray-300 mb-4">Don't have an account?</p>
+=======
+                <p class="text-gray-600 dark:text-gray-300 mb-4">Belum memiliki akun?</p>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                 <a 
                     href="{{ url_for('register') }}" 
                     class="inline-block w-full border border-blue-600 text-blue-600 hover:bg-blue-50 dark:hover:bg-gray-700 px-6 py-2 rounded-lg font-medium transition-colors duration-300"
                 >
+<<<<<<< HEAD
                     Register Here
+=======
+                    Daftar Disini
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                 </a>
             </div>
         </div>
@@ -77,26 +115,42 @@
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-200 dark:border-gray-700 transition-colors duration-300">
             <div class="p-6">
                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4 text-center">
+<<<<<<< HEAD
                     Voting Process
+=======
+                    Proses Pemilihan
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                 </h3>
                 <div class="grid grid-cols-3 gap-4 text-center">
                     <div class="space-y-2">
                         <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mx-auto">
                             <i class="fas fa-sign-in-alt text-blue-600 dark:text-blue-400 text-xl"></i>
                         </div>
+<<<<<<< HEAD
                         <p class="text-sm font-medium text-gray-600 dark:text-gray-300">1. Login</p>
+=======
+                        <p class="text-sm font-medium text-gray-600 dark:text-gray-300">1. Masuk</p>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                     </div>
                     <div class="space-y-2">
                         <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mx-auto">
                             <i class="fas fa-vote-yea text-blue-600 dark:text-blue-400 text-xl"></i>
                         </div>
+<<<<<<< HEAD
                         <p class="text-sm font-medium text-gray-600 dark:text-gray-300">2. Vote</p>
+=======
+                        <p class="text-sm font-medium text-gray-600 dark:text-gray-300">2. Memilih</p>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                     </div>
                     <div class="space-y-2">
                         <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mx-auto">
                             <i class="fas fa-check-circle text-blue-600 dark:text-blue-400 text-xl"></i>
                         </div>
+<<<<<<< HEAD
                         <p class="text-sm font-medium text-gray-600 dark:text-gray-300">3. Confirm</p>
+=======
+                        <p class="text-sm font-medium text-gray-600 dark:text-gray-300">3. Konfirmasi</p>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                     </div>
                 </div>
             </div>
@@ -116,7 +170,11 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     const spinner = document.getElementById('submitSpinner');
     
     // Show loading state
+<<<<<<< HEAD
     submitText.textContent = 'Authenticating...';
+=======
+    submitText.textContent = 'Mengautentikasi...';
+>>>>>>> 1e614d5 (pesan commit baru di sini)
     spinner.classList.remove('hidden');
     submitBtn.disabled = true;
     
@@ -127,7 +185,11 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     
     // Simple validation
     if (!formData.nim || !formData.jurusan) {
+<<<<<<< HEAD
         showToast('Please fill all required fields', 'error');
+=======
+        showToast('Harap isi semua kolom yang diperlukan', 'error');
+>>>>>>> 1e614d5 (pesan commit baru di sini)
         resetButton();
         return;
     }
@@ -150,20 +212,48 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
                 window.location.href = result.redirect || '/vote';
             }, 1500);
         } else {
+<<<<<<< HEAD
             showToast(result.message || 'Login failed', 'error');
         }
     } catch (error) {
         console.error('Login error:', error);
         showToast('Network error. Please try again.', 'error');
+=======
+            showToast(result.message || 'Login gagal', 'error');
+        }
+    } catch (error) {
+        console.error('Login error:', error);
+        showToast('Kesalahan jaringan. Silakan coba lagi.', 'error');
+>>>>>>> 1e614d5 (pesan commit baru di sini)
     } finally {
         resetButton();
     }
     
     function resetButton() {
+<<<<<<< HEAD
         submitText.textContent = 'Login & Vote';
+=======
+        submitText.textContent = 'Masuk & Memilih';
+>>>>>>> 1e614d5 (pesan commit baru di sini)
         spinner.classList.add('hidden');
         submitBtn.disabled = false;
     }
 });
+<<<<<<< HEAD
+=======
+
+function showToast(message, type = 'success') {
+    const toast = document.createElement('div');
+    toast.className = `fixed bottom-4 right-4 px-4 py-2 rounded-md text-white text-sm font-medium ${
+        type === 'success' ? 'bg-green-500' : 'bg-red-500'
+    }`;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
+>>>>>>> 1e614d5 (pesan commit baru di sini)
 </script>
 {% endblock %}

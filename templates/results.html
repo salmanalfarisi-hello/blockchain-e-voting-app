@@ -1,17 +1,30 @@
 {% extends "base.html" %}
 
+<<<<<<< HEAD
 {% block title %}Voting Results - E-Voting{% endblock %}
+=======
+{% block title %}Hasil Pemilihan - E-Voting Ketua Himpunan TI UMPO{% endblock %}
+>>>>>>> 1e614d5 (pesan commit baru di sini)
 
 {% block content %}
 <div class="min-h-screen py-8 px-4">
     <!-- Header Section -->
     <div class="text-center mb-8">
+<<<<<<< HEAD
         <div class="w-20 h-20 bg-green-600 rounded-lg flex items-center justify-center mx-auto mb-4">
             <i class="fas fa-chart-bar text-white text-2xl"></i>
         </div>
         <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Voting Results</h1>
         <h2 class="text-xl font-semibold text-blue-600 dark:text-blue-400 mb-3">{{ jurusan }}</h2>
         <p class="text-gray-600 dark:text-gray-300">Real-time blockchain-verified results</p>
+=======
+        <div class="w-20 h-20 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+            <i class="fas fa-chart-bar text-white text-2xl"></i>
+        </div>
+        <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">Hasil Pemilihan</h1>
+        <h2 class="text-xl font-semibold text-blue-600 dark:text-blue-400 mb-3">Ketua Himpunan Teknik Informatika</h2>
+        <p class="text-gray-600 dark:text-gray-300">Hasil real-time berbasis blockchain</p>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
     </div>
 
     {% if vote_count %}
@@ -21,15 +34,26 @@
         {% set leading_candidate = vote_count.keys()|selectattr('value', 'equalto', max_votes)|first %}
         {% set total_votes = vote_count.values()|sum %}
         
+<<<<<<< HEAD
         <div class="bg-yellow-500 rounded-lg p-6 text-white shadow text-center">
             <div class="flex items-center justify-center space-x-3 mb-4">
                 <i class="fas fa-crown text-xl"></i>
                 <h2 class="text-xl font-bold">Current Leader</h2>
+=======
+        <div class="bg-blue-600 rounded-lg p-6 text-white shadow text-center">
+            <div class="flex items-center justify-center space-x-3 mb-4">
+                <i class="fas fa-crown text-xl"></i>
+                <h2 class="text-xl font-bold">Pemimpin Saat Ini</h2>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
             </div>
             <h3 class="text-3xl font-bold mb-3">{{ leading_candidate }}</h3>
             <div class="bg-white bg-opacity-20 rounded-lg p-3 inline-block">
                 <p class="font-medium">
+<<<<<<< HEAD
                     {{ max_votes }} votes 
+=======
+                    {{ max_votes }} suara 
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                     {% if total_votes > 0 %}
                         ({{ "%.1f"|format((max_votes / total_votes) * 100) }}%)
                     {% else %}
@@ -47,7 +71,11 @@
             <!-- Vote Distribution Chart -->
             <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
                 <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4 text-center">
+<<<<<<< HEAD
                     Vote Distribution
+=======
+                    Distribusi Suara
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                 </h3>
                 <div class="flex justify-center">
                     <canvas id="resultsChart" width="400" height="400"></canvas>
@@ -57,6 +85,7 @@
             <!-- Candidate Rankings -->
             <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
                 <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4 text-center">
+<<<<<<< HEAD
                     Candidate Rankings
                 </h3>
                 <div class="space-y-3">
@@ -66,6 +95,17 @@
                             <div class="flex items-center space-x-3">
                                 <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
                                     <i class="fas fa-user-tie text-white"></i>
+=======
+                    Peringkat Kandidat
+                </h3>
+                <div class="space-y-3">
+                    {% for candidate, votes in vote_count.items()|sort(attribute='1', reverse=true) %}
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg hover:shadow transition-all duration-200">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-user-tie text-blue-600 dark:text-blue-400"></i>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                                 </div>
                                 <div>
                                     <h4 class="font-semibold text-gray-900 dark:text-white">{{ candidate }}</h4>
@@ -80,7 +120,11 @@
                             </div>
                             <div class="text-right">
                                 <div class="text-lg font-bold text-blue-600 dark:text-blue-400">{{ votes }}</div>
+<<<<<<< HEAD
                                 <div class="text-xs text-gray-500 dark:text-gray-400">votes</div>
+=======
+                                <div class="text-xs text-gray-500 dark:text-gray-400">suara</div>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                             </div>
                         </div>
                     </div>
@@ -91,6 +135,7 @@
 
         <!-- Statistics Cards -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+<<<<<<< HEAD
             <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow text-center">
                 <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mx-auto mb-2">
                     <i class="fas fa-vote-yea text-white"></i>
@@ -118,6 +163,35 @@
             <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow text-center">
                 <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mx-auto mb-2">
                     <i class="fas fa-clock text-white"></i>
+=======
+            <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow hover:shadow-md transition-all duration-200 text-center">
+                <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mx-auto mb-2">
+                    <i class="fas fa-vote-yea text-blue-600 dark:text-blue-400"></i>
+                </div>
+                <div class="text-xl font-bold text-gray-900 dark:text-white">{{ total_votes }}</div>
+                <div class="text-sm text-gray-600 dark:text-gray-400">Total Suara</div>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow hover:shadow-md transition-all duration-200 text-center">
+                <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mx-auto mb-2">
+                    <i class="fas fa-users text-blue-600 dark:text-blue-400"></i>
+                </div>
+                <div class="text-xl font-bold text-gray-900 dark:text-white">{{ candidates|length }}</div>
+                <div class="text-sm text-gray-600 dark:text-gray-400">Kandidat</div>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow hover:shadow-md transition-all duration-200 text-center">
+                <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mx-auto mb-2">
+                    <i class="fas fa-crown text-blue-600 dark:text-blue-400"></i>
+                </div>
+                <div class="text-xl font-bold text-gray-900 dark:text-white">{{ max_votes }}</div>
+                <div class="text-sm text-gray-600 dark:text-gray-400">Suara Tertinggi</div>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-800 rounded-lg p-4 shadow hover:shadow-md transition-all duration-200 text-center">
+                <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mx-auto mb-2">
+                    <i class="fas fa-clock text-blue-600 dark:text-blue-400"></i>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                 </div>
                 <div class="text-xl font-bold text-gray-900 dark:text-white" id="lastUpdate">Live</div>
                 <div class="text-sm text-gray-600 dark:text-gray-400">Status</div>
@@ -132,6 +206,7 @@
             <div class="w-16 h-16 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <i class="fas fa-inbox text-gray-400"></i>
             </div>
+<<<<<<< HEAD
             <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">No Votes Yet</h3>
             <p class="text-gray-600 dark:text-gray-300 mb-6">
                 No votes have been cast for {{ jurusan }} yet.
@@ -139,6 +214,15 @@
             <a href="{{ url_for('login') }}" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-medium text-white inline-flex items-center">
                 <i class="fas fa-vote-yea mr-2"></i>
                 Cast Your Vote
+=======
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Belum Ada Suara</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-6">
+                Belum ada suara yang masuk untuk pemilihan Ketua Himpunan Teknik Informatika.
+            </p>
+            <a href="{{ url_for('login') }}" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-lg font-medium text-white inline-flex items-center">
+                <i class="fas fa-vote-yea mr-2"></i>
+                Gunakan Hak Pilih Anda
+>>>>>>> 1e614d5 (pesan commit baru di sini)
             </a>
         </div>
     </div>
@@ -146,6 +230,7 @@
 
     <!-- Navigation -->
     <div class="max-w-md mx-auto">
+<<<<<<< HEAD
         <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow">
             <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4 text-center">
                 View Other Departments
@@ -163,6 +248,22 @@
             <a href="{{ url_for('index') }}" class="block text-center text-blue-600 dark:text-blue-400 hover:underline">
                 Back to Home
             </a>
+=======
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow hover:shadow-md transition-all duration-200">
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4 text-center">
+                Navigasi
+            </h3>
+            <div class="flex flex-col space-y-3 mb-6">
+                <a href="{{ url_for('index') }}" 
+                   class="px-4 py-2 rounded-lg font-medium text-center border border-blue-600 text-blue-600 hover:bg-blue-50 dark:hover:bg-gray-700">
+                    Kembali ke Beranda
+                </a>
+                <a href="{{ url_for('blockchain_explorer') }}" 
+                   class="px-4 py-2 rounded-lg font-medium text-center bg-blue-600 text-white hover:bg-blue-700">
+                    Jelajahi Blockchain
+                </a>
+            </div>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
         </div>
     </div>
 </div>
@@ -175,17 +276,30 @@ let resultsChart;
 function createResultsChart() {
     {% if vote_count %}
     const ctx = document.getElementById('resultsChart').getContext('2d');
+<<<<<<< HEAD
+=======
+    const isDark = document.documentElement.classList.contains('dark');
+    const textColor = isDark ? '#e5e7eb' : '#374151';
+>>>>>>> 1e614d5 (pesan commit baru di sini)
     
     const data = {
         labels: {{ vote_count.keys()|list|tojson }},
         datasets: [{
             data: {{ vote_count.values()|list|tojson }},
             backgroundColor: [
+<<<<<<< HEAD
                 '#3b82f6',
                 '#06b6d4',
                 '#8b5cf6',
                 '#f59e0b',
                 '#ef4444'
+=======
+                '#3b82f6',  // Blue
+                '#06b6d4',  // Cyan
+                '#8b5cf6',  // Purple
+                '#f59e0b',  // Yellow
+                '#ef4444'   // Red
+>>>>>>> 1e614d5 (pesan commit baru di sini)
             ],
             borderWidth: 0
         }]
@@ -196,9 +310,22 @@ function createResultsChart() {
         data: data,
         options: {
             responsive: true,
+<<<<<<< HEAD
             plugins: {
                 legend: {
                     position: 'bottom'
+=======
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        color: textColor,
+                        font: {
+                            size: 12
+                        }
+                    }
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                 }
             }
         }
@@ -207,12 +334,22 @@ function createResultsChart() {
 }
 
 function updateLastUpdateTime() {
+<<<<<<< HEAD
     document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
+=======
+    const now = new Date();
+    document.getElementById('lastUpdate').textContent = 
+        `Diperbarui: ${now.toLocaleTimeString()}`;
+>>>>>>> 1e614d5 (pesan commit baru di sini)
 }
 
 async function refreshResults() {
     try {
+<<<<<<< HEAD
         const response = await fetch('/api/results/{{ jurusan }}');
+=======
+        const response = await fetch('/api/results/Teknik%20Informatika');
+>>>>>>> 1e614d5 (pesan commit baru di sini)
         const newData = await response.json();
         
         const currentData = {{ vote_count|tojson if vote_count else '{}' }};
@@ -234,8 +371,24 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(refreshResults, 30000);
 });
 
+<<<<<<< HEAD
 socket.on('vote_cast', function(data) {
     if (data.jurusan === '{{ jurusan }}') {
+=======
+// Watch for theme changes to update chart colors
+new MutationObserver(() => {
+    if (resultsChart) {
+        resultsChart.destroy();
+        createResultsChart();
+    }
+}).observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['class']
+});
+
+socket.on('vote_cast', function(data) {
+    if (data.jurusan === 'Teknik Informatika') {
+>>>>>>> 1e614d5 (pesan commit baru di sini)
         setTimeout(() => {
             location.reload();
         }, 2000);

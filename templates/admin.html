@@ -1,8 +1,14 @@
 {% extends "admin_base.html" %}
 
+<<<<<<< HEAD
 {% block title %}Admin Dashboard - Modern E-Voting{% endblock %}
 {% block page_title %}Dashboard{% endblock %}
 {% block page_description %}Overview and management of the e-voting system{% endblock %}
+=======
+{% block title %}Admin Dashboard - E-Voting Ketua Himpunan TI UMPO{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+{% block page_description %}Overview and management of the e-voting system for Ketua Himpunan Teknik Informatika{% endblock %}
+>>>>>>> 1e614d5 (pesan commit baru di sini)
 
 {% block content %}
 <!-- Stats Cards - Compact Design -->
@@ -11,7 +17,11 @@
     <div class="card p-4 hover:shadow transition-all duration-200">
         <div class="flex items-center justify-between">
             <div>
+<<<<<<< HEAD
                 <p class="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Total Voters</p>
+=======
+                <p class="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Total Pemilih</p>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                 <p class="text-xl font-bold dark:text-white">{{ stats.total_voters }}</p>
                 <div class="flex items-center mt-1 text-xs">
                     <span class="text-green-500 dark:text-green-400 flex items-center">
@@ -35,7 +45,11 @@
     <div class="card p-4 hover:shadow transition-all duration-200">
         <div class="flex items-center justify-between">
             <div>
+<<<<<<< HEAD
                 <p class="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Total Candidates</p>
+=======
+                <p class="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Total Kandidat</p>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                 <p class="text-xl font-bold dark:text-white">{{ stats.total_candidates }}</p>
                 <div class="flex items-center mt-1 text-xs">
                     <span class="text-blue-500 dark:text-blue-400 flex items-center">
@@ -45,7 +59,11 @@
                         </svg>
                         Active
                     </span>
+<<<<<<< HEAD
                     <span class="text-gray-400 dark:text-gray-500 ml-1">candidates</span>
+=======
+                    <span class="text-gray-400 dark:text-gray-500 ml-1">kandidat</span>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                 </div>
             </div>
             <div class="w-10 h-10 bg-green-100 dark:bg-green-900/50 rounded-lg flex items-center justify-center">
@@ -61,16 +79,26 @@
     <div class="card p-4 hover:shadow transition-all duration-200">
         <div class="flex items-center justify-between">
             <div>
+<<<<<<< HEAD
                 <p class="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Total Votes</p>
+=======
+                <p class="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Total Suara</p>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                 <p class="text-xl font-bold dark:text-white">{{ stats.total_votes }}</p>
                 <div class="flex items-center mt-1 text-xs">
                     <span class="text-purple-500 dark:text-purple-400 flex items-center">
                         <svg class="w-3 h-3 mr-0.5" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
                         </svg>
+<<<<<<< HEAD
                         Votes
                     </span>
                     <span class="text-gray-400 dark:text-gray-500 ml-1">cast today</span>
+=======
+                        Suara
+                    </span>
+                    <span class="text-gray-400 dark:text-gray-500 ml-1">hari ini</span>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                 </div>
             </div>
             <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/50 rounded-lg flex items-center justify-center">
@@ -118,15 +146,24 @@
                     </svg>
                 </div>
                 <div>
+<<<<<<< HEAD
                     <h3 class="text-lg font-semibold dark:text-white">Add Candidate</h3>
                     <p class="text-xs text-gray-500 dark:text-gray-400">Register new candidate</p>
+=======
+                    <h3 class="text-lg font-semibold dark:text-white">Tambah Kandidat</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Daftarkan kandidat baru</p>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                 </div>
             </div>
             
             <form id="addCandidateForm" class="space-y-3">
                 <div>
                     <label for="candidateName" class="block text-xs font-medium mb-1 dark:text-gray-300">
+<<<<<<< HEAD
                         Full Name
+=======
+                        Nama Lengkap
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                     </label>
                     <input 
                         type="text" 
@@ -134,14 +171,22 @@
                         name="candidateName"
                         required
                         class="input w-full text-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+<<<<<<< HEAD
                         placeholder="Candidate name"
+=======
+                        placeholder="Nama kandidat"
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                     >
                 </div>
                 
                 <div class="grid grid-cols-2 gap-3">
                     <div>
                         <label for="candidateNim" class="block text-xs font-medium mb-1 dark:text-gray-300">
+<<<<<<< HEAD
                             Student ID (NIM)
+=======
+                            NIM
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                         </label>
                         <input 
                             type="text" 
@@ -149,11 +194,16 @@
                             name="candidateNim"
                             required
                             class="input w-full text-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+<<<<<<< HEAD
                             placeholder="Enter NIM"
+=======
+                            placeholder="Masukkan NIM"
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                         >
                     </div>
                     <div>
                         <label for="candidateJurusan" class="block text-xs font-medium mb-1 dark:text-gray-300">
+<<<<<<< HEAD
                             Department
                         </label>
                         <select 
@@ -166,12 +216,28 @@
                             <option value="Teknik Informatika">Teknik Informatika</option>
                             <option value="Sistem Informasi">Sistem Informasi</option>
                         </select>
+=======
+                            Jurusan
+                        </label>
+                        <input 
+                            type="text" 
+                            id="candidateJurusan" 
+                            name="candidateJurusan" 
+                            value="Teknik Informatika"
+                            readonly
+                            class="input w-full text-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white bg-gray-100 dark:bg-gray-700"
+                        >
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                     </div>
                 </div>
                 
                 <div>
                     <label for="candidateVisi" class="block text-xs font-medium mb-1 dark:text-gray-300">
+<<<<<<< HEAD
                         Vision (Visi)
+=======
+                        Visi
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                     </label>
                     <textarea 
                         id="candidateVisi" 
@@ -179,13 +245,21 @@
                         required
                         rows="2"
                         class="input w-full text-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+<<<<<<< HEAD
                         placeholder="Candidate's vision"
+=======
+                        placeholder="Visi kandidat"
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                     ></textarea>
                 </div>
                 
                 <div>
                     <label for="candidateMisi" class="block text-xs font-medium mb-1 dark:text-gray-300">
+<<<<<<< HEAD
                         Mission (Misi)
+=======
+                        Misi
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                     </label>
                     <textarea 
                         id="candidateMisi" 
@@ -193,12 +267,20 @@
                         required
                         rows="2"
                         class="input w-full text-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+<<<<<<< HEAD
                         placeholder="Candidate's mission"
+=======
+                        placeholder="Misi kandidat"
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                     ></textarea>
                 </div>
                 
                 <button type="submit" class="btn btn-primary w-full py-2 text-sm">
+<<<<<<< HEAD
                     Add Candidate
+=======
+                    Tambah Kandidat
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                 </button>
             </form>
         </div>
@@ -215,13 +297,22 @@
                         </svg>
                     </div>
                     <div>
+<<<<<<< HEAD
                         <h3 class="text-lg font-semibold dark:text-white">All Candidates</h3>
                         <p class="text-xs text-gray-500 dark:text-gray-400">Manage registered candidates</p>
+=======
+                        <h3 class="text-lg font-semibold dark:text-white">Daftar Kandidat</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">Kelola kandidat terdaftar</p>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                     </div>
                 </div>
                 <div class="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-md text-sm">
                     <span class="font-medium dark:text-white" id="candidateCount">0</span> 
+<<<<<<< HEAD
                     <span class="dark:text-gray-300">candidates</span>
+=======
+                    <span class="dark:text-gray-300">kandidat</span>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                 </div>
             </div>
             
@@ -233,8 +324,13 @@
                             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
                         </svg>
                     </div>
+<<<<<<< HEAD
                     <h3 class="text-sm font-medium dark:text-white mb-1">Loading candidates...</h3>
                     <p class="text-xs text-gray-500 dark:text-gray-400">Please wait while we load the data</p>
+=======
+                    <h3 class="text-sm font-medium dark:text-white mb-1">Memuat kandidat...</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Harap tunggu sambil kami memuat data</p>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                 </div>
             </div>
         </div>
@@ -242,7 +338,11 @@
 </div>
 
 <!-- Charts Section - Compact -->
+<<<<<<< HEAD
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-5">
+=======
+<div class="grid grid-cols-1 gap-5 mt-5">
+>>>>>>> 1e614d5 (pesan commit baru di sini)
     <!-- Teknik Informatika Chart -->
     <div class="card p-5">
         <div class="flex items-center mb-4">
@@ -252,14 +352,20 @@
                 </svg>
             </div>
             <div>
+<<<<<<< HEAD
                 <h3 class="text-lg font-semibold dark:text-white">Teknik Informatika</h3>
                 <p class="text-xs text-gray-500 dark:text-gray-400">Real-time voting results</p>
+=======
+                <h3 class="text-lg font-semibold dark:text-white">Hasil Pemilihan</h3>
+                <p class="text-xs text-gray-500 dark:text-gray-400">Hasil real-time pemilihan Ketua Himpunan Teknik Informatika</p>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
             </div>
         </div>
         <div class="h-[250px]">
             <canvas id="tiChart"></canvas>
         </div>
     </div>
+<<<<<<< HEAD
     
     <!-- Sistem Informasi Chart -->
     <div class="card p-5">
@@ -278,6 +384,8 @@
             <canvas id="siChart"></canvas>
         </div>
     </div>
+=======
+>>>>>>> 1e614d5 (pesan commit baru di sini)
 </div>
 
 <!-- Modals -->
@@ -290,15 +398,24 @@
                     <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/>
                 </svg>
             </div>
+<<<<<<< HEAD
             <h3 class="text-xl font-semibold dark:text-white mb-1">Edit Candidate</h3>
             <p class="text-xs text-gray-500 dark:text-gray-400">Update candidate information</p>
+=======
+            <h3 class="text-xl font-semibold dark:text-white mb-1">Edit Kandidat</h3>
+            <p class="text-xs text-gray-500 dark:text-gray-400">Perbarui informasi kandidat</p>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
         </div>
         
         <form id="editCandidateForm" class="space-y-3">
             <input type="hidden" id="editCandidateId" name="candidateId">
             <div>
                 <label for="editCandidateName" class="block text-xs font-medium mb-1 dark:text-gray-300">
+<<<<<<< HEAD
                     Full Name
+=======
+                    Nama Lengkap
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                 </label>
                 <input 
                     type="text" 
@@ -311,7 +428,11 @@
             <div class="grid grid-cols-2 gap-3">
                 <div>
                     <label for="editCandidateNim" class="block text-xs font-medium mb-1 dark:text-gray-300">
+<<<<<<< HEAD
                         Student ID (NIM)
+=======
+                        NIM
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                     </label>
                     <input 
                         type="text" 
@@ -323,6 +444,7 @@
                 </div>
                 <div>
                     <label for="editCandidateJurusan" class="block text-xs font-medium mb-1 dark:text-gray-300">
+<<<<<<< HEAD
                         Department
                     </label>
                     <select 
@@ -334,11 +456,27 @@
                         <option value="Teknik Informatika">Teknik Informatika</option>
                         <option value="Sistem Informasi">Sistem Informasi</option>
                     </select>
+=======
+                        Jurusan
+                    </label>
+                    <input 
+                        type="text" 
+                        id="editCandidateJurusan" 
+                        name="candidateJurusan" 
+                        value="Teknik Informatika"
+                        readonly
+                        class="input w-full text-sm dark:bg-gray-800 dark:border-gray-700 dark:text-white bg-gray-100 dark:bg-gray-700"
+                    >
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                 </div>
             </div>
             <div>
                 <label for="editCandidateVisi" class="block text-xs font-medium mb-1 dark:text-gray-300">
+<<<<<<< HEAD
                     Vision (Visi)
+=======
+                    Visi
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                 </label>
                 <textarea 
                     id="editCandidateVisi" 
@@ -350,7 +488,11 @@
             </div>
             <div>
                 <label for="editCandidateMisi" class="block text-xs font-medium mb-1 dark:text-gray-300">
+<<<<<<< HEAD
                     Mission (Misi)
+=======
+                    Misi
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                 </label>
                 <textarea 
                     id="editCandidateMisi" 
@@ -366,10 +508,17 @@
                     onclick="closeEditModal()" 
                     class="btn bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white flex-1 py-2 text-sm"
                 >
+<<<<<<< HEAD
                     Cancel
                 </button>
                 <button type="submit" class="btn btn-primary flex-1 py-2 text-sm">
                     Save Changes
+=======
+                    Batal
+                </button>
+                <button type="submit" class="btn btn-primary flex-1 py-2 text-sm">
+                    Simpan Perubahan
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                 </button>
             </div>
         </form>
@@ -385,15 +534,24 @@
                     <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"/>
                 </svg>
             </div>
+<<<<<<< HEAD
             <h3 class="text-xl font-semibold dark:text-white mb-2">Delete Candidate</h3>
             <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Are you sure you want to delete:</p>
+=======
+            <h3 class="text-xl font-semibold dark:text-white mb-2">Hapus Kandidat</h3>
+            <p class="text-xs text-gray-500 dark:text-gray-400 mb-1">Anda yakin ingin menghapus:</p>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
             <h4 class="text-lg font-semibold text-red-500 dark:text-red-400 mb-4" id="deleteCandidateName"></h4>
             <div class="bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-800 rounded-lg p-3 mb-4">
                 <div class="flex items-start space-x-2">
                     <svg class="w-4 h-4 text-red-500 dark:text-red-400 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
                     </svg>
+<<<<<<< HEAD
                     <p class="text-xs text-red-600 dark:text-red-300">This action cannot be undone.</p>
+=======
+                    <p class="text-xs text-red-600 dark:text-red-300">Tindakan ini tidak dapat dibatalkan.</p>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                 </div>
             </div>
             <div class="flex space-x-2">
@@ -401,10 +559,17 @@
                     onclick="closeDeleteModal()" 
                     class="btn bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white flex-1 py-2 text-sm"
                 >
+<<<<<<< HEAD
                     Cancel
                 </button>
                 <button id="confirmDeleteBtn" class="btn btn-danger flex-1 py-2 text-sm">
                     Delete
+=======
+                    Batal
+                </button>
+                <button id="confirmDeleteBtn" class="btn btn-danger flex-1 py-2 text-sm">
+                    Hapus
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                 </button>
             </div>
         </div>
@@ -415,7 +580,11 @@
 {% block scripts %}
 <script>
 // Simplified and optimized JavaScript
+<<<<<<< HEAD
 let tiChart, siChart;
+=======
+let tiChart;
+>>>>>>> 1e614d5 (pesan commit baru di sini)
 
 // Utility functions
 function showToast(message, type = 'success') {
@@ -436,7 +605,11 @@ function setLoading(element, isLoading) {
         element.innerHTML = `<svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+<<<<<<< HEAD
         </svg> Processing...`;
+=======
+        </svg> Memproses...`;
+>>>>>>> 1e614d5 (pesan commit baru di sini)
         element.disabled = true;
     } else {
         element.innerHTML = element.dataset.originalText || element.textContent;
@@ -463,8 +636,13 @@ async function loadCandidates() {
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-7.536 5.879a1 1 0 001.415 0 3 3 0 014.242 0 1 1 0 001.415-1.415 5 5 0 00-7.072 0 1 1 0 000 1.415z" clip-rule="evenodd"/>
                         </svg>
                     </div>
+<<<<<<< HEAD
                     <h3 class="text-sm font-medium dark:text-white mb-1">No candidates found</h3>
                     <p class="text-xs text-gray-500 dark:text-gray-400">Add your first candidate using the form</p>
+=======
+                    <h3 class="text-sm font-medium dark:text-white mb-1">Tidak ada kandidat ditemukan</h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Tambahkan kandidat pertama menggunakan form</p>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                 </div>
             `;
             return;
@@ -508,16 +686,26 @@ async function loadCandidates() {
                 </div>
                 <div class="mt-2 pt-2 border-t border-gray-200 dark:border-gray-700">
                     <p class="text-xs font-medium dark:text-gray-200">Visi:</p>
+<<<<<<< HEAD
                     <p class="text-xs text-gray-600 dark:text-gray-400 line-clamp-2">${candidate.visi || 'No vision provided'}</p>
                     <p class="text-xs font-medium dark:text-gray-200 mt-1">Misi:</p>
                     <p class="text-xs text-gray-600 dark:text-gray-400 line-clamp-2">${candidate.misi || 'No mission provided'}</p>
+=======
+                    <p class="text-xs text-gray-600 dark:text-gray-400 line-clamp-2">${candidate.visi || 'Tidak ada visi'}</p>
+                    <p class="text-xs font-medium dark:text-gray-200 mt-1">Misi:</p>
+                    <p class="text-xs text-gray-600 dark:text-gray-400 line-clamp-2">${candidate.misi || 'Tidak ada misi'}</p>
+>>>>>>> 1e614d5 (pesan commit baru di sini)
                 </div>
             `;
             container.appendChild(candidateElement);
         });
     } catch (error) {
         console.error('Error loading candidates:', error);
+<<<<<<< HEAD
         showToast('Error loading candidates', 'error');
+=======
+        showToast('Gagal memuat kandidat', 'error');
+>>>>>>> 1e614d5 (pesan commit baru di sini)
     }
 }
 
@@ -547,10 +735,17 @@ document.getElementById('addCandidateForm').addEventListener('submit', async fun
             e.target.reset();
             loadCandidates();
         } else {
+<<<<<<< HEAD
             showToast(result.message || 'Failed to add candidate', 'error');
         }
     } catch (error) {
         showToast('Network error', 'error');
+=======
+            showToast(result.message || 'Gagal menambahkan kandidat', 'error');
+        }
+    } catch (error) {
+        showToast('Kesalahan jaringan', 'error');
+>>>>>>> 1e614d5 (pesan commit baru di sini)
     } finally {
         setLoading(submitBtn, false);
     }
@@ -572,7 +767,11 @@ async function openEditModal(nim) {
         document.getElementById('editModal').classList.remove('hidden');
         document.getElementById('editModal').classList.add('flex');
     } catch (error) {
+<<<<<<< HEAD
         showToast('Error loading candidate data', 'error');
+=======
+        showToast('Gagal memuat data kandidat', 'error');
+>>>>>>> 1e614d5 (pesan commit baru di sini)
     }
 }
 
@@ -610,7 +809,11 @@ document.getElementById('editCandidateForm').addEventListener('submit', async fu
             showToast(result.message, 'error');
         }
     } catch (error) {
+<<<<<<< HEAD
         showToast('Error updating candidate', 'error');
+=======
+        showToast('Gagal memperbarui kandidat', 'error');
+>>>>>>> 1e614d5 (pesan commit baru di sini)
     } finally {
         setLoading(submitBtn, false);
     }
@@ -654,7 +857,11 @@ document.getElementById('confirmDeleteBtn').addEventListener('click', async func
             showToast(result.message, 'error');
         }
     } catch (error) {
+<<<<<<< HEAD
         showToast('Error deleting candidate', 'error');
+=======
+        showToast('Gagal menghapus kandidat', 'error');
+>>>>>>> 1e614d5 (pesan commit baru di sini)
     } finally {
         setLoading(submitBtn, false);
     }
@@ -663,6 +870,7 @@ document.getElementById('confirmDeleteBtn').addEventListener('click', async func
 // Charts
 async function loadResults() {
     try {
+<<<<<<< HEAD
         const [tiResponse, siResponse] = await Promise.all([
             fetch('/api/results/Teknik Informatika'),
             fetch('/api/results/Sistem Informasi')
@@ -672,6 +880,10 @@ async function loadResults() {
             tiResponse.json(),
             siResponse.json()
         ]);
+=======
+        const response = await fetch('/api/results/Teknik Informatika');
+        const tiData = await response.json();
+>>>>>>> 1e614d5 (pesan commit baru di sini)
         
         const isDark = document.documentElement.classList.contains('dark');
         const textColor = isDark ? '#e5e7eb' : '#374151';
@@ -698,6 +910,7 @@ async function loadResults() {
                 }
             }
         });
+<<<<<<< HEAD
         
         // SI Chart
         if (siChart) siChart.destroy();
@@ -721,6 +934,8 @@ async function loadResults() {
                 }
             }
         });
+=======
+>>>>>>> 1e614d5 (pesan commit baru di sini)
     } catch (error) {
         console.error('Error loading results:', error);
     }

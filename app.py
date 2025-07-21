@@ -71,7 +71,10 @@ def admin_logout():
     
     return jsonify({'success': False, 'message': 'Tidak ada sesi admin aktif!'})
 
+<<<<<<< HEAD
 # Update route /admin/candidates:
+=======
+>>>>>>> 1e614d5 (pesan commit baru di sini)
 @app.route('/admin/candidates', methods=['GET', 'POST'])
 def admin_candidates():
     if 'admin' not in session:
@@ -113,11 +116,18 @@ def admin_candidates():
     all_candidates = db.get_all_candidates()
     return jsonify({'candidates': all_candidates})
 
+<<<<<<< HEAD
 # Update route /admin/candidates/edit:
 @app.route('/admin/candidates/edit', methods=['PUT'])
 def edit_candidate():
     if 'admin' not in session:
         return jsonify({'success': False, 'message': 'Unauthorized'})
+=======
+@app.route('/admin/candidates/edit', methods=['PUT'])
+def edit_candidate():
+    if 'admin' not in session:
+        return jsonify({'success': False, 'message': 'Unauthorized'}), 401
+>>>>>>> 1e614d5 (pesan commit baru di sini)
     
     try:
         data = request.get_json()
@@ -129,7 +139,11 @@ def edit_candidate():
         misi = data.get('misi')
         
         if not all([original_nim, nama, nim, jurusan, visi, misi]):
+<<<<<<< HEAD
             return jsonify({'success': False, 'message': 'Data tidak lengkap!'})
+=======
+            return jsonify({'success': False, 'message': 'Data tidak lengkap!'}), 400
+>>>>>>> 1e614d5 (pesan commit baru di sini)
         
         if db.edit_candidate(original_nim, nama, nim, jurusan, visi, misi):
             socketio.emit('candidate_updated', {
@@ -142,6 +156,7 @@ def edit_candidate():
             })
             return jsonify({'success': True, 'message': 'Kandidat berhasil diperbarui!'})
         else:
+<<<<<<< HEAD
             return jsonify({'success': False, 'message': 'Gagal memperbarui kandidat! NIM mungkin sudah digunakan.'})
     
     except Exception as e:
@@ -174,6 +189,29 @@ def delete_candidate():
     except Exception as e:
         print(f"Error deleting candidate: {e}")
         return jsonify({'success': False, 'message': 'Terjadi kesalahan saat menghapus kandidat!'})
+=======
+            return jsonify({'success': False, 'message': 'Gagal memperbarui kandidat! NIM mungkin sudah digunakan.'}), 400
+    
+    except Exception as e:
+        print(f"Error editing candidate: {e}")
+        return jsonify({'success': False, 'message': 'Terjadi kesalahan saat memperbarui kandidat!'}), 500
+    
+@app.route('/admin/candidates/<nim>', methods=['DELETE'])
+def delete_candidate(nim):
+    if 'admin' not in session:
+        return jsonify({'success': False, 'message': 'Unauthorized'}), 401
+    
+    try:
+        if db.delete_candidate(nim):
+            # Emit real-time update
+            socketio.emit('candidate_deleted', {'nim': nim})
+            return jsonify({'success': True, 'message': 'Candidate deleted successfully'})
+        else:
+            return jsonify({'success': False, 'message': 'Candidate not found'}), 404
+    except Exception as e:
+        print(f"Error deleting candidate: {e}")
+        return jsonify({'success': False, 'message': 'Error deleting candidate'}), 500
+>>>>>>> 1e614d5 (pesan commit baru di sini)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -236,7 +274,11 @@ def vote():
     if blockchain.has_voted(mahasiswa['nim']):
         return redirect(url_for('vote_confirmed'))
     
+<<<<<<< HEAD
     # Ambil semua kandidat (tanpa filter jurusan)
+=======
+    # Get all candidates (without jurusan filter)
+>>>>>>> 1e614d5 (pesan commit baru di sini)
     candidates = db.get_all_candidates()
     return render_template('vote.html', candidates=candidates, mahasiswa=mahasiswa)
 
@@ -266,21 +308,33 @@ def submit_vote():
         mahasiswa = session['mahasiswa']
         print(f"Debug: Voting attempt by {mahasiswa['nim']} for {candidate}")  # Log debugging
 
+<<<<<<< HEAD
         # Cek apakah sudah pernah voting
+=======
+        # Check if already voted
+>>>>>>> 1e614d5 (pesan commit baru di sini)
         if blockchain.has_voted(mahasiswa['nim']):
             return jsonify({
                 'success': False,
                 'message': 'Anda sudah melakukan voting sebelumnya!'
             }), 400
 
+<<<<<<< HEAD
         # Buat transaksi
+=======
+        # Create transaction
+>>>>>>> 1e614d5 (pesan commit baru di sini)
         transaction = Transaction(
             voter_id=mahasiswa['nim'],
             candidate=candidate,
             jurusan=mahasiswa['jurusan']
         )
 
+<<<<<<< HEAD
         # Tambahkan ke blockchain
+=======
+        # Add to blockchain
+>>>>>>> 1e614d5 (pesan commit baru di sini)
         if blockchain.add_transaction(transaction):
             blockchain.mine_pending_transactions()
             
@@ -309,7 +363,10 @@ def submit_vote():
             'message': f'Terjadi kesalahan sistem: {str(e)}'
         }), 500
         
+<<<<<<< HEAD
         
+=======
+>>>>>>> 1e614d5 (pesan commit baru di sini)
 @app.route('/results/<jurusan>')
 def results(jurusan):
     vote_count = blockchain.get_vote_count(jurusan)
@@ -391,7 +448,10 @@ def blockchain_info():
         print(f"Error in blockchain_info: {e}")
         return jsonify({'error': 'Could not retrieve blockchain data'}), 500
     
+<<<<<<< HEAD
     
+=======
+>>>>>>> 1e614d5 (pesan commit baru di sini)
 @app.route('/blockchain')
 def blockchain_explorer():
     return render_template('blockchain.html')
@@ -402,6 +462,15 @@ def logout():
     session.pop('admin', None)
     return redirect(url_for('index'))
 
+<<<<<<< HEAD
+=======
+@app.route('/vote-confirmed')
+def vote_confirmed():
+    if 'mahasiswa' not in session:
+        return redirect(url_for('login'))
+    return render_template('vote-confirmed.html')
+
+>>>>>>> 1e614d5 (pesan commit baru di sini)
 # Socket.IO events
 @socketio.on('connect')
 def handle_connect():
@@ -417,6 +486,7 @@ def handle_join_room(data):
     join_room(room)
     emit('status', {'msg': f'Joined room {room}'})
 
+<<<<<<< HEAD
 @app.route('/vote-confirmed')
 def vote_confirmed():
     if 'mahasiswa' not in session:
@@ -426,10 +496,15 @@ def vote_confirmed():
 
 if __name__ == '__main__':
      # Bersihkan session lama
+=======
+if __name__ == '__main__':
+    # Clean old session
+>>>>>>> 1e614d5 (pesan commit baru di sini)
     try:
         os.remove('flask_session')
     except:
         pass
+<<<<<<< HEAD
     # # Add sample data
     # sample_candidates = [
     #     ("Alice Johnson", "12345001", "Teknik Informatika"),
@@ -440,6 +515,8 @@ if __name__ == '__main__':
     
     # for nama, nim, jurusan in sample_candidates:
     #     db.add_candidate(nama, nim, jurusan)
+=======
+>>>>>>> 1e614d5 (pesan commit baru di sini)
     
     print("🚀 Starting Modern E-Voting Blockchain Application...")
     print("📱 Access: http://localhost:5000")
